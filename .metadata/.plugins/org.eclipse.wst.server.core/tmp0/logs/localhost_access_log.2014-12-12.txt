@@ -1,0 +1,4 @@
+127.0.0.1 - - [12/Dec/2014:15:06:39 +0100] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [12/Dec/2014:15:06:40 +0100] "GET /04_7bwi_student/index.jsp HTTP/1.1" 200 2119
+127.0.0.1 - - [12/Dec/2014:15:07:52 +0100] "POST /04_7bwi_student/index.jsp HTTP/1.1" 200 2489
+127.0.0.1 - - [12/Dec/2014:15:07:55 +0100] "GET /04_7bwi_student/index.jsp?type=delete&id=1 HTTP/1.1" 200 2119
