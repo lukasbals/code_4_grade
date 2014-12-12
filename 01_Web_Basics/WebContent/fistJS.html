@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ul {
+	margin-left: 20px;
+	color: blue;
+}
+
+li {
+	cursor: default;
+}
+
+span {
+	color: red;
+}
+
+p {
+	margin: 8px;
+	font-size: 20px;
+	color: blue;
+	cursor: pointer;
+}
+
+b {
+	text-decoration: underline;
+}
+
+button {
+	cursor: pointer;
+}
+</style>
+<script src="./res/js/jquery-1.11.1.min.js"></script>
+
+<script>
+	$(function() {
+		//alert("in");
+		$("#btn1").click(function() {
+			$("#output").fadeToggle();
+		});
+
+		$("#btn2").click(function() {
+			$("#output").append("Markus ist so schön!");
+		});
+		
+		$("#btn3").click(function() {
+			$("#output").empty("Markus ist so schön!");
+		});
+
+	});
+
+	$(function() {
+		$("li").hover(function() {
+			$(this).append($("<span> <-- </span>"));
+		}, function() {
+			$(this).find("span:last").remove();
+		});
+	});
+</script>
+
+
+</head>
+
+<body>
+	<h1>Java Script</h1>
+	<button id="btn1">Toggle data...</button>
+	<button id="btn2">Add text...</button>
+	<button id="btn3">Delete all Text...</button>
+	<div id="output">Markus ist so schön!</div>
+
+	<ul>
+		<li>Milk</li>
+		<li>Bread</li>
+		<li>Chips</li>
+		<li>Socks</li>
+	</ul>
+
+</body>
+</html>
