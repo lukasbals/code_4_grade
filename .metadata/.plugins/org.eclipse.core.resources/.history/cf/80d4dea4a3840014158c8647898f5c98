@@ -61,7 +61,7 @@ span[data-type] {
 		<div class="row" id="toggleDiv">
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
-				<div class="col-sm-3">
+				<div class="col-md-3">
 					<input id="vorname" type="text" class="form-control"
 						placeholder="Todo eintragen..." name="firstname">
 				</div>
