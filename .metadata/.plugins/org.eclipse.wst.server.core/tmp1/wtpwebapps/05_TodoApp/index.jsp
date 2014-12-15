@@ -30,21 +30,15 @@ span[data-type] {
 		$("#toggleButton").click(function() {
 			if (isOpen == true) {
 				$("#toggleDiv").slideToggle();
-				$("#toggleButton").html("Zuklappen ...")
+				$("#toggleButton").html("Zuklappen...")
 				isOpen = false;
 			} else {
 				$("#toggleDiv").slideToggle();
-				$("#toggleButton").html("Student dazu ...")
+				$("#toggleButton").html("Neues Todo")
 				isOpen = true;
 			}
 
 		});
-
-		$("[data-delete='delete']").click(
-				function() {
-					window.location = "index.jsp?type=delete&id="
-							+ $(this).attr("data-id");
-				});
 
 	});
 </script>
@@ -60,20 +54,16 @@ span[data-type] {
 		<div class="row">
 			<div class="col-md-12">
 				<button id="toggleButton" type="button"
-					class="btn btn-default btn-md">Student dazu ...</button>
+					class="btn btn-default btn-md">Neues Todo</button>
 			</div>
 		</div>
 		<p />
 		<div class="row" id="toggleDiv">
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<input id="vorname" type="text" class="form-control"
-						placeholder="Vorname..." name="firstname">
-				</div>
-				<div class="col-md-2">
-					<input id="nachname" type="text" class="form-control"
-						placeholder="Nachname..." name="lastname">
+						placeholder="Todo eintragen..." name="firstname">
 				</div>
 				<div class="col-md-2">
 					<input type="submit" class="btn btn-success btn-md"></input>
@@ -87,15 +77,13 @@ span[data-type] {
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Vorname</th>
-							<th>Nachname</th>
+							<th>Todo</th>
 							<th>Funktionen</th>
 						</tr>
 					</thead>
 					<tbody id="input">
 						<tr>
 							<td>bla</td>
-							<td data-update="updateField">bla</td>
 							<td data-update="updateField">bla</td>
 							<td><span data-id="" data-delete="delete" data-type="send"
 								class="glyphicon glyphicon-remove"></span></td>
