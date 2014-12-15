@@ -126,7 +126,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
 
-      <Context docBase="/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/ROOT" path="" reloadable="false"/><Context docBase="/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/04_7bwi_student" path="/04_7bwi_student" reloadable="true" source="org.eclipse.jst.jee.server:04_7bwi_student"/></Host>
+      <Context docBase="/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/ROOT" path="" reloadable="false"/><Context docBase="/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/04_7bwi_student" path="/04_7bwi_student" reloadable="true" source="org.eclipse.jst.jee.server:04_7bwi_student"/><Context docBase="/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/05_TodoApp" path="/05_TodoApp" reloadable="true" source="org.eclipse.jst.jee.server:05_TodoApp"/></Host>
     </Engine>
   </Service>
 </Server>
