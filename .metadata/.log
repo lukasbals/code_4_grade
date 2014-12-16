@@ -675,3 +675,6 @@ Binding(COMMAND+SHIFT+F,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.wst.sse.ui.structuredTextEditorScope,,,system)
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2014-12-16 14:23:56.446
+!MESSAGE Several ports (8080, 8009) required by Tomcat v7.0 Server at localhost (2) are already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).

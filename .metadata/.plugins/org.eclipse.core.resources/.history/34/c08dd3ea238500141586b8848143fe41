@@ -1,0 +1,16 @@
+package todos;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoDAO {
+	private Connection c;
+	private static List<Todo> todoList = new ArrayList<Todo>();
+	private static int nextID = 1;
+
+	public List<Todo> getAllTodos() {
+
+		return todoList;
+	}
+}

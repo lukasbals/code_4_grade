@@ -18,13 +18,17 @@ public class StudentDAO {
 		if (this.connection == null) {
 			setConnection();
 		}
-
 		studentList.clear();
+		getStudents();
+		return studentList;
 
+	}
+
+	private void getStudents() {
 		try {
 			Statement stmt = this.connection.createStatement();
 
-			ResultSet resultSet = stmt.executeQuery("select * from Students");
+			ResultSet resultSet = stmt.executeQuery("select * from Students;");
 			resultSet.first();
 			while (!(resultSet.isAfterLast())) {
 				Student s = new Student(resultSet.getString(2),
@@ -38,8 +42,6 @@ public class StudentDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return studentList;
-
 	}
 
 	public void saveStudent(Student s) {

@@ -63,19 +63,19 @@ span[data-type] {
 		<p />
 		<div class="row" id="toggleDiv">
 			<%
-				TodoDAO t = new TodoDAO();
+				TodoDAO d = new TodoDAO();
 
 				String todo = request.getParameter("todo");
 				String type = request.getParameter("type");
 
 				if (type != null && type.equals("delete")) {
 					String ID = request.getParameter("id");
-					t.deleteStudent(Integer.parseInt(ID));
+					d.deleteTodo(Integer.parseInt(ID));
 				}
 
 				if ((todo != null) && (todo != null)) {
 					Todo T = new Todo(todo);
-					t.saveStudent(T);
+					d.saveTodo(T);
 				}
 			%>
 			<form class="form-horizontal" method="post" action="index.jsp"
@@ -102,12 +102,12 @@ span[data-type] {
 					</thead>
 					<tbody id="input">
 						<%
-							List<Todo> todoList = t.getAllTodos();
-							for (Todo T : todoList) {
+							List<Todo> todoList = d.getAllTodos();
+							for (Todo t : todoList) {
 						%>
 						<tr>
-							<td>1</td>
-							<td data-update="updateField"><%=T.getTodo()%></td>
+							<td data-update="updateField"><%=t.getId()%></td>
+							<td data-update="updateField"><%=t.getTodo()%></td>
 							<td><span data-id="" data-delete="delete" data-type="send"
 								class="glyphicon glyphicon-remove"></span></td>
 						</tr>
