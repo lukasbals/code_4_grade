@@ -13,15 +13,21 @@ public class TodoDAO {
 	private static List<Todo> todoList = new ArrayList<Todo>();
 	private static int nextID = 1;
 
-	public List<Todo> getAllTodos() {
-
+	public TodoDAO() {
 		if (this.c == null) {
 			setConnection();
 		}
-		// deleteTodo();
 		todoList.clear();
+	}
+
+	public List<Todo> getAllTodos() {
 		getData();
 		return todoList;
+	}
+
+	public void deleteTodo(int id) {
+		deleteData(id);
+		getData();
 	}
 
 	private void getData() {
@@ -44,36 +50,31 @@ public class TodoDAO {
 	}
 
 	public void saveTodo(Todo s) {
-		s.setId(nextID);
-		todoList.add(s);
 		nextID++;
-	}
-
-	public void deleteTodo(int id) {
-		todoList.remove(id);
-
-		if (this.c == null) {
-			setConnection();
-		}
 		try {
-			Statement deleteStmt = this.c.createStatement();
+			Statement stmt = this.c.createStatement();
 
-			ResultSet resultSet = deleteStmt
-					.executeQuery("delete from Todos where idTodos=" + id);
-			resultSet.first();
-			System.out.println(resultSet);
+			// stmt.executeUpdate("insert into TodoApp.Todos (idTodos, todo")
+			// VALUES);
 
-			deleteStmt.close();
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		getData();
 	}
 
-	public void deleteData() {
+	private void deleteData(int id) {
+		try {
+			Statement stmt = this.c.createStatement();
 
+			stmt.executeUpdate("delete from Todos where idTodos=" + id);
+
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void setConnection() {

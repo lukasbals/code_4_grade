@@ -63,7 +63,7 @@ span[data-type] {
 		<div class="row">
 			<div class="col-md-12">
 				<button id="toggleButton" type="button"
-					class="btn btn-default btn-md">Neues Todo 5</button>
+					class="btn btn-default btn-md">Neues Todo</button>
 			</div>
 		</div>
 		<p />
