@@ -154,3 +154,11 @@
 0:0:0:0:0:0:0:1 - - [16/Dec/2014:08:09:05 +0100] "GET /05_TodoApp/res/js/jquery-ui.min.js HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [16/Dec/2014:08:09:05 +0100] "GET /05_TodoApp/res/css/jquery-ui.min.css HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [16/Dec/2014:08:09:05 +0100] "GET /05_TodoApp/res/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 304 -
+127.0.0.1 - - [16/Dec/2014:10:21:08 +0100] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [16/Dec/2014:10:21:09 +0100] "GET /04_7bwi_student/index.jsp HTTP/1.1" 200 2097
+0:0:0:0:0:0:0:1 - - [16/Dec/2014:10:21:09 +0100] "GET /04_7bwi_student/res/js/jquery-1.11.1.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Dec/2014:10:21:09 +0100] "GET /04_7bwi_student/res/js/jquery-ui.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Dec/2014:10:21:09 +0100] "GET /04_7bwi_student/res/css/bootstrap.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Dec/2014:10:21:09 +0100] "GET /04_7bwi_student/res/css/jquery-ui.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Dec/2014:10:22:23 +0100] "GET /04_7bwi_student/index.jsp HTTP/1.1" 200 2097
+0:0:0:0:0:0:0:1 - - [16/Dec/2014:10:22:32 +0100] "POST /04_7bwi_student/index.jsp HTTP/1.1" 200 2466
