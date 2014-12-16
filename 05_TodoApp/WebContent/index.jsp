@@ -43,7 +43,7 @@ span[data-type] {
 		});
 		$("[data-delete='delete']").click(
 				function() {
-					window.location = "index.jsp?type=delete&id="
+					window.location = "<%=request.getContextPath()%>/index.jsp?type=delete&id="
 							+ $(this).attr("data-id");
 				});
 
@@ -63,7 +63,7 @@ span[data-type] {
 		<div class="row">
 			<div class="col-md-12">
 				<button id="toggleButton" type="button"
-					class="btn btn-default btn-md">Neues Todo</button>
+					class="btn btn-default btn-md">Neues Todo 5</button>
 			</div>
 		</div>
 		<p />

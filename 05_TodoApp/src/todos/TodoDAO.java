@@ -14,11 +14,11 @@ public class TodoDAO {
 	private static int nextID = 1;
 
 	public List<Todo> getAllTodos() {
-		System.out.println(data);
 
 		if (this.c == null) {
 			setConnection();
 		}
+		// deleteTodo();
 		todoList.clear();
 		getData();
 		return todoList;
@@ -43,6 +43,39 @@ public class TodoDAO {
 
 	}
 
+	public void saveTodo(Todo s) {
+		s.setId(nextID);
+		todoList.add(s);
+		nextID++;
+	}
+
+	public void deleteTodo(int id) {
+		todoList.remove(id);
+
+		if (this.c == null) {
+			setConnection();
+		}
+		try {
+			Statement deleteStmt = this.c.createStatement();
+
+			ResultSet resultSet = deleteStmt
+					.executeQuery("delete from Todos where idTodos=" + id);
+			resultSet.first();
+			System.out.println(resultSet);
+
+			deleteStmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		getData();
+	}
+
+	public void deleteData() {
+
+	}
+
 	private void setConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -56,15 +89,5 @@ public class TodoDAO {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void saveTodo(Todo s) {
-		s.setId(nextID);
-		todoList.add(s);
-		nextID++;
-	}
-
-	public void deleteTodo(int id) {
-		todoList.remove(id);
 	}
 }
