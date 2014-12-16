@@ -13,7 +13,7 @@ public class StudentDAO {
 	private static List<Student> studentList = new ArrayList<Student>();
 	private static int nextID = 1;
 
-	public List<Student> getAllStudents() {
+	public List<Student> getAllStudents() throws SQLException {
 
 		if (this.connection == null) {
 			setConnection();
@@ -21,25 +21,18 @@ public class StudentDAO {
 
 		studentList.clear();
 
-		try {
-			Statement stmt = this.connection.createStatement();
+		Statement stmt = this.connection.createStatement();
 
-			ResultSet resultSet = stmt.executeQuery("select * from Students");
-			resultSet.first();
-			while (!(resultSet.isAfterLast())) {
-				Student s = new Student(resultSet.getString(2),
-						resultSet.getString(3), resultSet.getInt(1));
-				studentList.add(s);
-				resultSet.next();
-			}
-			stmt.close();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ResultSet resultSet = stmt.executeQuery("select * from Students");
+		resultSet.first();
+		while (!(resultSet.isAfterLast())) {
+			Student s = new Student(resultSet.getString(2),
+					resultSet.getString(3), resultSet.getInt(1));
+			studentList.add(s);
+			resultSet.next();
 		}
+		stmt.close();
 		return studentList;
-
 	}
 
 	public void saveStudent(Student s) {

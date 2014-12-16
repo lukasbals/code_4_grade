@@ -123,7 +123,7 @@ span[data-type] {
 							<td data-update="updateField"><%=s.getFirstname()%></td>
 							<td data-update="updateField"><%=s.getLastname()%></td>
 							<td><span data-id="<%=s.getId()%>" data-delete="delete"
-								data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+								data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;<span
 								data-update="update" data-type="send"
 								class="glyphicon glyphicon-pencil"></span></td>
 
