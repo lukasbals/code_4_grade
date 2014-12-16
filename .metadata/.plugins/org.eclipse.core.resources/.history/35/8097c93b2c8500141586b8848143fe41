@@ -40,12 +40,8 @@ span[data-type] {
 				$("#toggleButton").html("Neues Todo")
 				isOpen = true;
 			}
+
 		});
-		$("[data-delete='delete']").click(
-				function() {
-					window.location = "index.jsp?type=delete&id="
-							+ $(this).attr("data-id");
-				});
 
 	});
 </script>

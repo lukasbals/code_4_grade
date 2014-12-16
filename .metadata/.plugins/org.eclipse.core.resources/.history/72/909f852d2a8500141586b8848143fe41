@@ -40,12 +40,8 @@ span[data-type] {
 				$("#toggleButton").html("Neues Todo")
 				isOpen = true;
 			}
+
 		});
-		$("[data-delete='delete']").click(
-				function() {
-					window.location = "index.jsp?type=delete&id="
-							+ $(this).attr("data-id");
-				});
 
 	});
 </script>
@@ -114,9 +110,9 @@ span[data-type] {
 						<tr>
 							<td data-update="updateField"><%=t.getId()%></td>
 							<td data-update="updateField"><%=t.getTodo()%></td>
-							<td><span data-id="<%=t.getId()%>" data-delete="delete"
-								data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-								data-id="<%=t.getId()%>" data-update="update" data-type="send"
+							<td><span data-id="" data-delete="delete" data-type="send"
+								class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+								data-update="update" data-type="send"
 								class="glyphicon glyphicon-pencil"></span></td>
 						</tr>
 						<%

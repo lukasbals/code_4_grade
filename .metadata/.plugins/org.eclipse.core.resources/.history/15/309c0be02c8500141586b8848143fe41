@@ -1,10 +1,10 @@
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="todos.TodoDAO"%>
-<%@page import="todos.Todo"%>
-<%@page import="javax.swing.JOptionPane"%>
-<%@page import="java.util.List"%>
+<%@page import="at.bals.students.StudentDAO"%>
+<%@page import="at.bals.students.Student"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,7 @@ span[data-type] {
 }
 
 .container {
-	background-color: white;
+	background-color: lightgrey;
 }
 </style>
 <script>
@@ -33,14 +33,16 @@ span[data-type] {
 		$("#toggleButton").click(function() {
 			if (isOpen == true) {
 				$("#toggleDiv").slideToggle();
-				$("#toggleButton").html("Zuklappen...")
+				$("#toggleButton").html("Zuklappen ...")
 				isOpen = false;
 			} else {
 				$("#toggleDiv").slideToggle();
-				$("#toggleButton").html("Neues Todo")
+				$("#toggleButton").html("Student dazu ...")
 				isOpen = true;
 			}
+
 		});
+
 		$("[data-delete='delete']").click(
 				function() {
 					window.location = "index.jsp?type=delete&id="
@@ -55,40 +57,43 @@ span[data-type] {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 id="type" class="page-header">
-					Todo App<small> by Bals</small>
-				</h1>
+				<h1>Student List</h1>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<button id="toggleButton" type="button"
-					class="btn btn-default btn-md">Neues Todo</button>
+					class="btn btn-default btn-md">Student dazu ...</button>
 			</div>
 		</div>
 		<p />
 		<div class="row" id="toggleDiv">
 			<%
-				TodoDAO d = new TodoDAO();
+				StudentDAO d = new StudentDAO();
 
-				String todo = request.getParameter("todo");
+				String fName = request.getParameter("firstname");
+				String lName = request.getParameter("lastname");
 				String type = request.getParameter("type");
 
 				if (type != null && type.equals("delete")) {
 					String ID = request.getParameter("id");
-					d.deleteTodo(Integer.parseInt(ID));
+					d.deleteStudent(Integer.parseInt(ID));
 				}
 
-				if ((todo != null) && (todo != null)) {
-					Todo T = new Todo(todo);
-					d.saveTodo(T);
+				if ((fName != null) && (lName != null)) {
+					Student S = new Student(fName, lName);
+					d.saveStudent(S);
 				}
 			%>
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
-				<div class="col-sm-3">
-					<input id="todo" type="text" class="form-control"
-						placeholder="Todo eintragen..." name="todo">
+				<div class="col-md-2">
+					<input id="vorname" type="text" class="form-control"
+						placeholder="Vorname..." name="firstname">
+				</div>
+				<div class="col-md-2">
+					<input id="nachname" type="text" class="form-control"
+						placeholder="Nachname..." name="lastname">
 				</div>
 				<div class="col-md-2">
 					<input type="submit" class="btn btn-success btn-md"></input>
@@ -102,26 +107,31 @@ span[data-type] {
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Todo</th>
+							<th>Vorname</th>
+							<th>Nachname</th>
 							<th>Funktionen</th>
 						</tr>
 					</thead>
 					<tbody id="input">
+
 						<%
-							List<Todo> todoList = d.getAllTodos();
-							for (Todo t : todoList) {
+							List<Student> studentList = d.getAllStudents();
+							for (Student s : studentList) {
 						%>
 						<tr>
-							<td data-update="updateField"><%=t.getId()%></td>
-							<td data-update="updateField"><%=t.getTodo()%></td>
-							<td><span data-id="<%=t.getId()%>" data-delete="delete"
+							<td><%=s.getId()%></td>
+							<td data-update="updateField"><%=s.getFirstname()%></td>
+							<td data-update="updateField"><%=s.getLastname()%></td>
+							<td><span data-id="<%=s.getId()%>" data-delete="delete"
 								data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-								data-id="<%=t.getId()%>" data-update="update" data-type="send"
+								data-update="update" data-type="send"
 								class="glyphicon glyphicon-pencil"></span></td>
+
 						</tr>
 						<%
 							}
 						%>
+
 					</tbody>
 				</table>
 			</div>

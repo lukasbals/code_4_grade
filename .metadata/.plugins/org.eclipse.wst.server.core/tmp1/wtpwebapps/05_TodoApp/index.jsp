@@ -40,8 +40,12 @@ span[data-type] {
 				$("#toggleButton").html("Neues Todo")
 				isOpen = true;
 			}
-
 		});
+		$("[data-delete='delete']").click(
+				function() {
+					window.location = "index.jsp?type=delete&id="
+							+ $(this).attr("data-id");
+				});
 
 	});
 </script>
@@ -51,7 +55,9 @@ span[data-type] {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 id="type" class="page-header">Todo App<small> by Bals</small></h1>
+				<h1 id="type" class="page-header">
+					Todo App<small> by Bals</small>
+				</h1>
 			</div>
 		</div>
 		<div class="row">
@@ -81,8 +87,8 @@ span[data-type] {
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
 				<div class="col-sm-3">
-					<input id="vorname" type="text" class="form-control"
-						placeholder="Todo eintragen..." name="firstname">
+					<input id="todo" type="text" class="form-control"
+						placeholder="Todo eintragen..." name="todo">
 				</div>
 				<div class="col-md-2">
 					<input type="submit" class="btn btn-success btn-md"></input>
@@ -108,8 +114,10 @@ span[data-type] {
 						<tr>
 							<td data-update="updateField"><%=t.getId()%></td>
 							<td data-update="updateField"><%=t.getTodo()%></td>
-							<td><span data-id="" data-delete="delete" data-type="send"
-								class="glyphicon glyphicon-remove"></span></td>
+							<td><span data-id="<%=t.getId()%>" data-delete="delete"
+								data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+								data-id="<%=t.getId()%>" data-update="update" data-type="send"
+								class="glyphicon glyphicon-pencil"></span></td>
 						</tr>
 						<%
 							}

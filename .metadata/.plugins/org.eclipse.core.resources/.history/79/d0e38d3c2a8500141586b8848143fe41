@@ -40,12 +40,8 @@ span[data-type] {
 				$("#toggleButton").html("Neues Todo")
 				isOpen = true;
 			}
+
 		});
-		$("[data-delete='delete']").click(
-				function() {
-					window.location = "index.jsp?type=delete&id="
-							+ $(this).attr("data-id");
-				});
 
 	});
 </script>
@@ -71,18 +67,18 @@ span[data-type] {
 			<%
 				TodoDAO d = new TodoDAO();
 
-				String todo = request.getParameter("todo");
-				String type = request.getParameter("type");
+					String todo = request.getParameter("todo");
+					String type = request.getParameter("type");
 
-				if (type != null && type.equals("delete")) {
-					String ID = request.getParameter("id");
-					d.deleteTodo(Integer.parseInt(ID));
-				}
+					if (type != null && type.equals("delete")) {
+						String ID = request.getParameter("id");
+						d.deleteTodo(Integer.parseInt(ID));
+					}
 
-				if ((todo != null) && (todo != null)) {
-					Todo T = new Todo(todo);
-					d.saveTodo(T);
-				}
+					if ((todo != null) && (todo != null)) {
+						Todo T = new Todo(todo);
+						d.saveTodo(T);
+					}
 			%>
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
@@ -109,14 +105,14 @@ span[data-type] {
 					<tbody id="input">
 						<%
 							List<Todo> todoList = d.getAllTodos();
-							for (Todo t : todoList) {
+											for (Todo t : todoList) {
 						%>
 						<tr>
 							<td data-update="updateField"><%=t.getId()%></td>
 							<td data-update="updateField"><%=t.getTodo()%></td>
-							<td><span data-id="<%=t.getId()%>" data-delete="delete"
+							<td><span data-id="<%t.getId()%>" data-delete="delete"
 								data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-								data-id="<%=t.getId()%>" data-update="update" data-type="send"
+								data-update="update" data-type="send"
 								class="glyphicon glyphicon-pencil"></span></td>
 						</tr>
 						<%

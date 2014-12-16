@@ -14,7 +14,6 @@ public class TodoDAO {
 	private static int nextID = 1;
 
 	public List<Todo> getAllTodos() {
-		System.out.println(data);
 
 		if (this.c == null) {
 			setConnection();
