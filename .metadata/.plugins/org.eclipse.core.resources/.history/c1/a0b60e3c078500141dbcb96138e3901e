@@ -1,0 +1,32 @@
+package todos;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class TodoDAO {
+	private static List<Todo> studentList = new ArrayList<Todo>();
+	private static int nextID = 1;
+
+	public List<Todo> getAllStudents() {
+		return todoList;
+	}
+
+	public void saveStudent(Student s) {
+		s.setId(nextID);
+		todoList.add(s);
+		nextID++;
+	}
+
+	public synchronized void deleteStudent(int id) {
+		for (Student student : studentList) {
+			if (student.getId() == id) {
+				studentList.remove(student);
+				return;
+			}
+
+		}
+
+	}
+}

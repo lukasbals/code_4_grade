@@ -1,0 +1,13 @@
+package todos;
+
+public class Todo {
+	int id;
+	String todo;
+	
+	public Todo(String todo){
+		
+	}
+	public Todo(String todo, int id){
+		
+	}
+}

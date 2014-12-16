@@ -1,9 +1,7 @@
 INDEX VERSION 1.3+/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-432539360.index
-3735573552.index
-432539360.index
-2649695964.index
 257693539.index
-2080734888.index
-1275537612.index
+3735573552.index
 3508372988.index
+1275537612.index
+2080734888.index
+2649695964.index

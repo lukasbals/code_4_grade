@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@page import="todos.TodoDAO"%>
+<%@page import="todos.Todo"%>
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +62,22 @@ span[data-type] {
 		</div>
 		<p />
 		<div class="row" id="toggleDiv">
+			<%
+				TodoDAO t = new TodoDAO();
+
+				String todo = request.getParameter("todo");
+				String type = request.getParameter("type");
+
+				if (type != null && type.equals("delete")) {
+					String ID = request.getParameter("id");
+					t.deleteStudent(Integer.parseInt(ID));
+				}
+
+				if ((todo != null) && (todo != null)) {
+					Todo T = new Todo(todo);
+					t.saveStudent(T);
+				}
+			%>
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
 				<div class="col-sm-3">
@@ -81,12 +101,19 @@ span[data-type] {
 						</tr>
 					</thead>
 					<tbody id="input">
+						<%
+							List<Todo> todoList = t.getAllTodos();
+							for (Todo T : todoList) {
+						%>
 						<tr>
 							<td>1</td>
-							<td data-update="updateField">Blumen gießen ...</td>
+							<td data-update="updateField"><%=T.getTodo()%></td>
 							<td><span data-id="" data-delete="delete" data-type="send"
 								class="glyphicon glyphicon-remove"></span></td>
 						</tr>
+						<%
+							}
+						%>
 					</tbody>
 				</table>
 			</div>

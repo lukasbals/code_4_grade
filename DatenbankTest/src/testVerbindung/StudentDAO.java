@@ -10,6 +10,7 @@ public class StudentDAO {
 	private int number;
 	private String firstName;
 	private String lastName;
+	private Connection c;
 
 	public static void main(String[] args) {
 		StudentDAO dao = new StudentDAO();
@@ -22,56 +23,42 @@ public class StudentDAO {
 	}
 
 	public void printStudent() throws SQLException {
-		// setup the connection with the DB.
-		Connection c;
+		if (this.c == null) {
+			getConnection();
+		}
+
+		Statement stmt = this.c.createStatement();
+
+		ResultSet resultSet = stmt.executeQuery("select * from Students");
+		resultSet.first();
+		while (!(resultSet.isAfterLast())) {
+			System.out.println(resultSet.getInt(1));
+			System.out.println(resultSet.getString(2));
+			System.out.println(resultSet.getString(3));
+			number = resultSet.getInt(1);
+			firstName = resultSet.getString(2);
+			lastName = resultSet.getString(3);
+			resultSet.next();
+		}
+		stmt.close();
+		this.c.close();
+
+	}
+
+	private Connection getConnection() {
+
 		try {
-			// this will load the MySQL driver, each DB has its own driver
 			Class.forName("com.mysql.jdbc.Driver");
-			c = DriverManager
+			this.c = DriverManager
 					.getConnection("jdbc:mysql://172.16.19.136/StudentList?user=studentapp&password=lukibals");
-
-			Statement stmt = c.createStatement();
-
-			ResultSet resultSet = stmt.executeQuery("select * from Students");
-			resultSet.first();
-			while (!(resultSet.isAfterLast())) {
-				System.out.println(resultSet.getInt(1));
-				System.out.println(resultSet.getString(2));
-				System.out.println(resultSet.getString(3));
-				number = resultSet.getInt(1);
-				firstName = resultSet.getString(2);
-				lastName = resultSet.getString(3);
-				resultSet.next();
-			}
-			stmt.close();
-			c.close();
+			return c;
 		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 }

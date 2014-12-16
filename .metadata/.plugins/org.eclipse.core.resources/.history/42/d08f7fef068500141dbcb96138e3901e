@@ -1,0 +1,30 @@
+package todos;
+
+public class Todo {
+	int id;
+	String todo;
+
+	public Todo(String todo) {
+		super();
+	}
+
+	public Todo(String todo, int id) {
+
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTodo() {
+		return todo;
+	}
+
+	public void setTodo(String todo) {
+		this.todo = todo;
+	}
+}

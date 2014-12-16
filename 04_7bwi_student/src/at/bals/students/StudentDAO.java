@@ -1,15 +1,37 @@
 package at.bals.students;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class StudentDAO {
-
+	private Connection connection;
 	private static List<Student> studentList = new ArrayList<Student>();
 	private static int nextID = 1;
 
-	public List<Student> getAllStudents() {
+	public List<Student> getAllStudents() throws SQLException {
+
+		if (this.connection == null) {
+			setConnection();
+		}
+
+		studentList.clear();
+
+		Statement stmt = this.connection.createStatement();
+
+		ResultSet resultSet = stmt.executeQuery("select * from Students");
+		resultSet.first();
+		while (!(resultSet.isAfterLast())) {
+			Student s = new Student(resultSet.getString(2),
+					resultSet.getString(3), resultSet.getInt(1));
+			studentList.add(s);
+			resultSet.next();
+		}
+		stmt.close();
 		return studentList;
 	}
 
@@ -19,13 +41,21 @@ public class StudentDAO {
 		nextID++;
 	}
 
-	public synchronized void deleteStudent(int id) {
-		for (Student student : studentList) {
-			if (student.getId() == id) {
-				studentList.remove(student);
-				return;
-			}
+	public void deleteStudent(int id) {
+		studentList.remove(id);
+	}
 
+	private void setConnection() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			this.connection = DriverManager
+					.getConnection("jdbc:mysql://172.16.19.136/StudentList?user=studentapp&password=lukibals");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
