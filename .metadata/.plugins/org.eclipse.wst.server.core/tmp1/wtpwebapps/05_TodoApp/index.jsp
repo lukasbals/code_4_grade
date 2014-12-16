@@ -51,7 +51,7 @@ span[data-type] {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 id="type" class="page-header">Todo List</h1>
+				<h1 id="type" class="page-header">Todo App<small> by Bals</small></h1>
 			</div>
 		</div>
 		<div class="row">
