@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>List</title>
 <script src="./res/js/jquery-1.11.1.min.js"></script>
 <script src="./res/js/jquery-ui.min.js"></script>
@@ -21,7 +20,7 @@ span[data-type] {
 }
 
 .container {
-	background-color: lightgrey;
+	background-color: white;
 }
 </style>
 <script>
@@ -48,7 +47,7 @@ span[data-type] {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Student List</h1>
+				<h1 id="type" class="page-header">Todo List</h1>
 			</div>
 		</div>
 		<div class="row">
@@ -83,8 +82,8 @@ span[data-type] {
 					</thead>
 					<tbody id="input">
 						<tr>
-							<td>bla</td>
-							<td data-update="updateField">bla</td>
+							<td>1</td>
+							<td data-update="updateField">Blumen gießen ...</td>
 							<td><span data-id="" data-delete="delete" data-type="send"
 								class="glyphicon glyphicon-remove"></span></td>
 						</tr>
