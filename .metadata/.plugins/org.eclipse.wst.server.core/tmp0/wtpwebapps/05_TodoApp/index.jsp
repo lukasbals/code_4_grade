@@ -19,6 +19,10 @@ span[data-type] {
 	cursor: pointer;
 }
 
+#toggleUpdate {
+	display: none;
+}
+
 #toggleDiv {
 	display: none;
 }
@@ -42,7 +46,11 @@ span[data-type] {
 			}
 		});
 
-		$("[data-delete='delete']").click(
+		$("[data-update='update']").click(function() {
+			$("#toggleUpdate").slideToggle();
+		});
+
+		$("[data-update='update']").click(
 				function() {
 					window.location = "index.jsp?type=delete&id="
 							+ $(this).attr("data-id");
@@ -51,6 +59,9 @@ span[data-type] {
 </script>
 </head>
 <body>
+	<%
+		TodoDAO d = new TodoDAO();
+	%>
 	<p />
 	<div class="container">
 		<div class="row">
@@ -61,21 +72,36 @@ span[data-type] {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<button id="toggleButton" type="button"
 					class="btn btn-default btn-md">Neues Todo</button>
 			</div>
+			<form class="form-horizontal" method="post" action="index.jsp"
+				role="form">
+				<div class="col-md-4" id="toggleUpdate">
+					<div class="col-md-8">
+						<input id="change" type="text" class="form-control"
+							placeholder="Update einfügen ..." name="update">
+					</div>
+					<div class="col-md-4">
+						<input type="submit" class="btn btn-success btn-md"></input>
+					</div>
+				</div>
+
+
+			</form>
+
+
 		</div>
 		<p />
 		<div class="row" id="toggleDiv">
 			<%
-				TodoDAO d = new TodoDAO();
-
 				String number = request.getParameter("number");
 				String todo = request.getParameter("todo");
 				String type = request.getParameter("type");
+				String update = request.getParameter("update");
 
-				if (type != null && type.equals("delete")) {
+				if ((type != null) && (type.equals("delete"))) {
 					String ID = request.getParameter("id");
 					d.deleteTodo(Integer.parseInt(ID));
 				}
@@ -83,6 +109,11 @@ span[data-type] {
 				if ((todo != null) && (number != null)) {
 					//Todo T = new Todo(todo);
 					d.saveTodo(todo, Integer.parseInt(number));
+				}
+
+				if (type != null && type.equals("update")) {
+					String ID = request.getParameter("id");
+					d.updateTodo(Integer.parseInt(ID), update);
 				}
 			%>
 			<form class="form-horizontal" method="post" action="index.jsp"
@@ -119,10 +150,16 @@ span[data-type] {
 						<tr>
 							<td data-update="updateField"><%=t.getId()%></td>
 							<td data-update="updateField"><%=t.getTodo()%></td>
-							<td><span data-id="<%=t.getId()%>" data-delete="delete"
-								data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-								data-id="<%=t.getId()%>" data-update="update" data-type="send"
-								class="glyphicon glyphicon-pencil"></span></td>
+
+							<td>
+								<div>
+									<span data-id="<%=t.getId()%>" data-delete="delete"
+										data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+										data-id="<%=t.getId()%>" data-update="update"
+										data-type="update" class="glyphicon glyphicon-pencil"></span>
+								</div>
+							</td>
+
 						</tr>
 						<%
 							}

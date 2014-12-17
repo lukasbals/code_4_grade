@@ -68,6 +68,10 @@ public class TodoDAO {
 		}
 	}
 
+	public void updateTodo(int id, String update) {
+
+	}
+
 	private void setConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
