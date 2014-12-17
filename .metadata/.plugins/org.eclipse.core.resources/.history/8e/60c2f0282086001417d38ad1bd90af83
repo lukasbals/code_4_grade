@@ -11,7 +11,7 @@ import java.util.List;
 public class TodoDAO {
 	private Connection c;
 	private static List<Todo> todoList = new ArrayList<Todo>();
-	private int lineNumber = 1;
+	int x = 1;
 
 	public TodoDAO() {
 		if (this.c == null) {
@@ -35,25 +35,20 @@ public class TodoDAO {
 				Todo t = new Todo(resultSet.getString(2), resultSet.getInt(1));
 				todoList.add(t);
 				resultSet.next();
-				lineNumber = resultSet.getRow() + 1;
-				// System.out.println(resultSet.getInt(1));
-				System.out.println(lineNumber);
-
+				this.x++;
 			}
-			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
-	public void saveTodo(String todo) {
+	public void saveTodo(String todo, int number) {
 		// nextID++;
 		try {
 			Statement stmt = this.c.createStatement();
 			stmt.executeUpdate("insert into TodoApp.Todos (idTodos, todo) VALUES ("
-					+ 30 + ", '" + todo + "')");
+					+ number + ", '" + todo + "')");
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -62,11 +57,6 @@ public class TodoDAO {
 	}
 
 	public void deleteTodo(int id) {
-		deleteData(id);
-		getData();
-	}
-
-	private void deleteData(int id) {
 		try {
 			Statement stmt = this.c.createStatement();
 

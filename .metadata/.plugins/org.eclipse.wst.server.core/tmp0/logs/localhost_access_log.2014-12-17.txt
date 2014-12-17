@@ -763,3 +763,13 @@
 0:0:0:0:0:0:0:1 - - [17/Dec/2014:19:57:19 +0100] "GET /05_TodoApp/res/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [17/Dec/2014:19:57:26 +0100] "POST /05_TodoApp/index.jsp HTTP/1.1" 200 4029
 0:0:0:0:0:0:0:1 - - [17/Dec/2014:19:58:08 +0100] "POST /05_TodoApp/index.jsp HTTP/1.1" 200 4415
+127.0.0.1 - - [17/Dec/2014:20:07:27 +0100] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:13 +0100] "POST /05_TodoApp/index.jsp HTTP/1.1" 200 4415
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:13 +0100] "GET /05_TodoApp/res/js/jquery-ui.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:13 +0100] "GET /05_TodoApp/res/css/bootstrap.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:13 +0100] "GET /05_TodoApp/res/js/jquery-1.11.1.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:13 +0100] "GET /05_TodoApp/res/css/jquery-ui.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:13 +0100] "GET /05_TodoApp/res/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:27 +0100] "POST /05_TodoApp/index.jsp HTTP/1.1" 200 4805
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:35 +0100] "GET /05_TodoApp/index.jsp?type=delete&id=6 HTTP/1.1" 200 4415
+0:0:0:0:0:0:0:1 - - [17/Dec/2014:20:08:44 +0100] "POST /05_TodoApp/index.jsp HTTP/1.1" 200 4805

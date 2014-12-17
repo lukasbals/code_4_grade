@@ -21,6 +21,11 @@ public class TodoDAO {
 	}
 
 	public List<Todo> getAllTodos() {
+		getData();
+		return todoList;
+	}
+
+	private void getData() {
 		try {
 			Statement stmt = this.c.createStatement();
 
@@ -32,16 +37,13 @@ public class TodoDAO {
 				resultSet.next();
 				this.x++;
 			}
-			System.out.println(this.x);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return todoList;
 	}
 
 	public void saveTodo(String todo, int number) {
-		// nextID++;
 		try {
 			Statement stmt = this.c.createStatement();
 			stmt.executeUpdate("insert into TodoApp.Todos (idTodos, todo) VALUES ("
