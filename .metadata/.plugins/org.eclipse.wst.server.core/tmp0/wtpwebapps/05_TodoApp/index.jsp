@@ -41,12 +41,12 @@ span[data-type] {
 				isOpen = true;
 			}
 		});
+
 		$("[data-delete='delete']").click(
 				function() {
-					window.location = "<%=request.getContextPath()%>/index.jsp?type=delete&id="
+					window.location = "index.jsp?type=delete&id="
 							+ $(this).attr("data-id");
 				});
-
 	});
 </script>
 </head>
@@ -79,7 +79,7 @@ span[data-type] {
 					d.deleteTodo(Integer.parseInt(ID));
 				}
 
-				if ((todo != null) && (todo != null)) {
+				if (todo != null) {
 					Todo T = new Todo(todo);
 					d.saveTodo(T);
 				}

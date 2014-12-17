@@ -30,6 +30,22 @@ public class TodoDAO {
 		getData();
 	}
 
+	public void saveTodo(Todo T) {
+		nextID++;
+		try {
+			Statement stmt = this.c.createStatement();
+
+			stmt.executeUpdate("insert into TodoApp.Todos (idTodos, todo) VALUES (34, '"
+					+ T + "')");
+
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		getData();
+	}
+
 	private void getData() {
 		try {
 			Statement stmt = this.c.createStatement();
@@ -47,21 +63,6 @@ public class TodoDAO {
 			e.printStackTrace();
 		}
 
-	}
-
-	public void saveTodo(Todo s) {
-		nextID++;
-		try {
-			Statement stmt = this.c.createStatement();
-
-			// stmt.executeUpdate("insert into TodoApp.Todos (idTodos, todo")
-			// VALUES);
-
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	private void deleteData(int id) {
