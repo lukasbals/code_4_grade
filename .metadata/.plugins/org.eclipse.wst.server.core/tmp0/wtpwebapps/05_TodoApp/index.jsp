@@ -71,6 +71,7 @@ span[data-type] {
 			<%
 				TodoDAO d = new TodoDAO();
 
+				String number = request.getParameter("number");
 				String todo = request.getParameter("todo");
 				String type = request.getParameter("type");
 
@@ -79,13 +80,17 @@ span[data-type] {
 					d.deleteTodo(Integer.parseInt(ID));
 				}
 
-				if (todo != null) {
-					Todo T = new Todo(todo);
-					d.saveTodo(T);
+				if ((todo != null) && (number != null)) {
+					//Todo T = new Todo(todo);
+					d.saveTodo(todo, Integer.parseInt(number));
 				}
 			%>
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
+				<div class="col-sm-1">
+					<input id="todo" type="text" class="form-control"
+						placeholder="ID ..." name="number">
+				</div>
 				<div class="col-sm-3">
 					<input id="todo" type="text" class="form-control"
 						placeholder="Todo eintragen..." name="todo">

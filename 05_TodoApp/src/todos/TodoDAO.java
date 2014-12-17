@@ -11,7 +11,7 @@ import java.util.List;
 public class TodoDAO {
 	private Connection c;
 	private static List<Todo> todoList = new ArrayList<Todo>();
-	private static int nextID = 1;
+	int x = 1;
 
 	public TodoDAO() {
 		if (this.c == null) {
@@ -21,32 +21,6 @@ public class TodoDAO {
 	}
 
 	public List<Todo> getAllTodos() {
-		getData();
-		return todoList;
-	}
-
-	public void deleteTodo(int id) {
-		deleteData(id);
-		getData();
-	}
-
-	public void saveTodo(Todo T) {
-		nextID++;
-		try {
-			Statement stmt = this.c.createStatement();
-
-			stmt.executeUpdate("insert into TodoApp.Todos (idTodos, todo) VALUES (34, '"
-					+ T + "')");
-
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		getData();
-	}
-
-	private void getData() {
 		try {
 			Statement stmt = this.c.createStatement();
 
@@ -56,16 +30,30 @@ public class TodoDAO {
 				Todo t = new Todo(resultSet.getString(2), resultSet.getInt(1));
 				todoList.add(t);
 				resultSet.next();
+				this.x++;
 			}
+			System.out.println(this.x);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return todoList;
+	}
+
+	public void saveTodo(String todo, int number) {
+		// nextID++;
+		try {
+			Statement stmt = this.c.createStatement();
+			stmt.executeUpdate("insert into TodoApp.Todos (idTodos, todo) VALUES ("
+					+ number + ", '" + todo + "')");
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
-	private void deleteData(int id) {
+	public void deleteTodo(int id) {
 		try {
 			Statement stmt = this.c.createStatement();
 
