@@ -21,6 +21,11 @@ public class TodoDAO {
 	}
 
 	public List<Todo> getAllTodos() {
+		getData();
+		return todoList;
+	}
+
+	private void getData() {
 		try {
 			Statement stmt = this.c.createStatement();
 
@@ -36,7 +41,6 @@ public class TodoDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return todoList;
 	}
 
 	public void saveTodo(String todo) {

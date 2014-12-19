@@ -19,11 +19,11 @@ span[data-type] {
 	cursor: pointer;
 }
 
-#toggleUpdate {
-	
+#toggleDivNew {
+	display: none;
 }
 
-#toggleDiv {
+#toggleDivUpdate {
 	display: none;
 }
 
@@ -33,21 +33,29 @@ span[data-type] {
 </style>
 <script>
 	$(function() {
-		var isOpen = true;
-		$("#toggleButton").click(function() {
-			if (isOpen == true) {
-				$("#toggleDiv").slideToggle();
-				$("#toggleButton").html("Zuklappen...")
-				isOpen = false;
+		var isNewOpen = true;
+		$("#toggleButtonNew").click(function() {
+			if (isNewOpen == true) {
+				$("#toggleDivNew").fadeToggle();
+				$("#toggleButtonNew").html("Neues Todo zuklappen...")
+				isNewOpen = false;
 			} else {
-				$("#toggleDiv").slideToggle();
-				$("#toggleButton").html("Neues Todo")
-				isOpen = true;
+				$("#toggleDivNew").fadeToggle();
+				$("#toggleButtonNew").html("Neues Todo")
+				isNewOpen = true;
 			}
 		});
-
-		$("[data-update='update']").click(function() {
-			$("#toggleUpdate").slideToggle();
+		var isUpdateOpen = true;
+		$("#toggleButtonUpdate").click(function() {
+			if (isUpdateOpen == true) {
+				$("#toggleDivUpdate").fadeToggle();
+				$("#toggleButtonUpdate").html("Update Todo zuklappen...")
+				isUpdateOpen = false;
+			} else {
+				$("#toggleDivUpdate").fadeToggle();
+				$("#toggleButtonUpdate").html("Update Todo")
+				isUpdateOpen = true;
+			}
 		});
 
 		$("[data-delete='delete']").click(
@@ -58,13 +66,35 @@ span[data-type] {
 		$("[data-update='update']").click(
 				function() {
 					window.location = "index.jsp?type=update&id="
-							+ $(this).attr("data-IDUpdate");
+							+ ($(this).attr("data-IDUpdate")) + "&update="
+							+ ($("#updateData").val());
 				});
 	});
 </script>
 </head>
 <body>
+	<%
+		TodoDAO d = new TodoDAO();
 
+		String todo = request.getParameter("todo");
+		String type = request.getParameter("type");
+		String updateData = request.getParameter("update");
+
+		if (todo != null) {
+			d.saveTodo(todo);
+		}
+
+		if ((type != null) && (type.equals("delete"))) {
+			String ID = request.getParameter("id");
+			d.deleteTodo(Integer.parseInt(ID));
+		}
+
+		if ((updateData != null) && (type != null)
+				&& (type.equals("update"))) {
+			String IDUpdate = request.getParameter("id");
+			d.updateTodo(Integer.parseInt(IDUpdate), updateData);
+		}
+	%>
 	<p />
 	<div class="container">
 		<div class="row">
@@ -75,51 +105,38 @@ span[data-type] {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-8">
-				<button id="toggleButton" type="button"
+			<div class="col-md-3">
+				<button id="toggleButtonNew" type="button"
 					class="btn btn-default btn-md">Neues Todo</button>
 			</div>
-		</div>
-		<p />
-		<div class="row" id="toggleDiv">
-			<%
-				TodoDAO d = new TodoDAO();
 
-				String todo = request.getParameter("todo");
-				String type = request.getParameter("type");
-				String update = request.getParameter("update");
-				//String change = request.getParameter("change");
-
-				if (todo != null) {
-					d.saveTodo(todo);
-				}
-
-				if ((type != null) && (type.equals("delete"))) {
-					String ID = request.getParameter("id");
-					d.deleteTodo(Integer.parseInt(ID));
-				}
-
-				if (type != null && type.equals("update")) {
-					String IDUpdate = request.getParameter("id");
-
-					d.updateTodo(Integer.parseInt(IDUpdate), update);
-				}
-				//				if (change!=null){
-				//					Todo t1 = new Todo(change);
-				//					d.updateTodo(id, update)
-
-				//				}
-			%>
 			<form class="form-horizontal" method="post" action="index.jsp"
 				role="form">
-				<div class="col-sm-4">
-					<input id="todo" type="text" class="form-control"
-						placeholder="Todo eintragen..." name="todo">
-				</div>
-				<div class="col-md-2">
-					<input type="submit" class="btn btn-success btn-md"></input>
+				<div id="toggleDivNew">
+					<div class="col-sm-4">
+						<input id="todo" type="text" class="form-control"
+							placeholder="Todo eintragen..." name="todo">
+					</div>
+					<div class="col-md-2">
+						<input type="submit" class="btn btn-success btn-md"></input>
+					</div>
 				</div>
 			</form>
+
+
+
+		</div>
+		<p />
+		<div class="row">
+			<div class="col-md-3">
+				<button id="toggleButtonUpdate" type="button"
+					class="btn btn-default btn-md">Update Todo</button>
+			</div>
+
+			<div class="col-md-4" id="toggleDivUpdate">
+				<input id="updateData" type="text" class="form-control"
+					placeholder="Test schreiben & auf Bleistift drücken ...">
+			</div>
 		</div>
 		<p />
 		<div class="row">
@@ -144,18 +161,11 @@ span[data-type] {
 							<td>
 								<div>
 									<span data-id="<%=t.getId()%>" data-delete="delete"
-										data-type="send" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-									<form class="form-horizontal" method="post" action="index.jsp"
-										role="form">
-										<div class="col-md-8">
-											<input type="text" class="form-control"
-												placeholder="Update einfügen ..." name="update">
-										</div>
-										
-										<span data-IDUpdate="<%=t.getId()%>" data-update="update"
-											data-type="send" class="glyphicon glyphicon-pencil"></span>
+										data-type="cursor" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<span data-IDUpdate="<%=t.getId()%>" data-update="update"
+										data-type="cursor" class="glyphicon glyphicon-pencil"></span>
 
-									</form>
+
 								</div>
 							</td>
 
