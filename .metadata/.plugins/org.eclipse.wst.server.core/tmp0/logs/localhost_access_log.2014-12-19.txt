@@ -1,0 +1,17 @@
+127.0.0.1 - - [19/Dec/2014:15:08:39 +0100] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:15 +0100] "GET /05_TodoApp/index.jsp HTTP/1.1" 200 5248
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:15 +0100] "GET /05_TodoApp/res/js/jquery-ui.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:15 +0100] "GET /05_TodoApp/res/css/jquery-ui.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:15 +0100] "GET /05_TodoApp/res/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:23 +0100] "GET /05_TodoApp/index.jsp HTTP/1.1" 200 5248
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:23 +0100] "GET /05_TodoApp/res/js/jquery-1.11.1.min.js HTTP/1.1" 200 95786
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:23 +0100] "GET /05_TodoApp/res/js/jquery-ui.min.js HTTP/1.1" 200 239564
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:23 +0100] "GET /05_TodoApp/res/css/jquery-ui.min.css HTTP/1.1" 200 30163
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:23 +0100] "GET /05_TodoApp/res/css/bootstrap.min.css HTTP/1.1" 200 114011
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:23 +0100] "GET /05_TodoApp/res/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 200 23320
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:23 +0100] "GET /favicon.ico HTTP/1.1" 404 973
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:33 +0100] "POST /05_TodoApp/index.jsp HTTP/1.1" 200 5702
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:36 +0100] "GET /05_TodoApp/index.jsp?type=update&id=48&update= HTTP/1.1" 200 5696
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:16:45 +0100] "GET /05_TodoApp/index.jsp?type=update&id=48&update=essen HTTP/1.1" 200 5701
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:19:10 +0100] "GET /05_TodoApp/index.jsp?type=update&id=48&update=blabla HTTP/1.1" 200 5702
+0:0:0:0:0:0:0:1 - - [19/Dec/2014:15:19:27 +0100] "POST /05_TodoApp/index.jsp HTTP/1.1" 200 6164
