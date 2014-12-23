@@ -30,6 +30,14 @@ span[data-type] {
 .container {
 	background-color: white;
 }
+
+.drop {
+	background: red;
+}
+
+span[data-update] {
+	display: none;
+}
 </style>
 <script>
 	$(function() {
@@ -63,12 +71,28 @@ span[data-type] {
 					window.location = "index.jsp?type=delete&id="
 							+ $(this).attr("data-id");
 				});
-		$("[data-update='update']").click(
-				function() {
-					window.location = "index.jsp?type=update&id="
-							+ ($(this).attr("data-IDUpdate")) + "&update="
-							+ ($("#updateData").val());
+
+		$("#toggleDivUpdate").draggable();
+		$("#droppableDiv").droppable(
+				{
+					drop : function(event, ui) {
+						$("#droppableDiv").addClass("drop").find("p").html(
+								"Dropped!")
+
+						window.location = "index.jsp?type=update&id="
+								+ ($("[data-update='update']")
+										.attr("data-IDUpdate")) + "&update="
+								+ ($("#updateData").val());
+					}
+
 				});
+		/*
+		 $("[data-update='update']").click(
+		 function() {
+		 window.location = "index.jsp?type=update&id="
+		 + ($(this).attr("data-IDUpdate")) + "&update="
+		 + ($("#updateData").val());
+		 });*/
 	});
 </script>
 </head>
@@ -133,9 +157,13 @@ span[data-type] {
 					class="btn btn-default btn-md">Update Todo</button>
 			</div>
 
-			<div class="col-md-4" id="toggleDivUpdate">
-				<input id="updateData" type="text" class="form-control"
-					placeholder="Test schreiben & auf Bleistift drücken ...">
+			<div class="col-md-8" id="toggleDivUpdate">
+				<ul class="nav navbar-nav">
+					<li><input id="updateData" type="text" class="form-control"
+						placeholder="Änderung eingeben ..."></li>
+					<li><img src="./res/img/hand.jpg" alt="..."
+						class="img-rounded"></li>
+				</ul>
 			</div>
 		</div>
 		<p />
@@ -156,7 +184,7 @@ span[data-type] {
 						%>
 						<tr>
 							<td data-update="updateField"><%=t.getId()%></td>
-							<td data-update="updateField"><%=t.getTodo()%></td>
+							<td data-update="updateField" id="droppableDiv"><%=t.getTodo()%></td>
 
 							<td>
 								<div>
@@ -164,8 +192,6 @@ span[data-type] {
 										data-type="cursor" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;
 									<span data-IDUpdate="<%=t.getId()%>" data-update="update"
 										data-type="cursor" class="glyphicon glyphicon-pencil"></span>
-
-
 								</div>
 							</td>
 
