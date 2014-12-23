@@ -86,13 +86,15 @@ span[data-update] {
 					}
 
 				});
+
 		/*
 		 $("[data-update='update']").click(
 		 function() {
 		 window.location = "index.jsp?type=update&id="
 		 + ($(this).attr("data-IDUpdate")) + "&update="
 		 + ($("#updateData").val());
-		 });*/
+		 });
+		 */
 	});
 </script>
 </head>
@@ -156,14 +158,15 @@ span[data-update] {
 				<button id="toggleButtonUpdate" type="button"
 					class="btn btn-default btn-md">Update Todo</button>
 			</div>
-
-			<div class="col-md-8" id="toggleDivUpdate">
-				<ul class="nav navbar-nav">
-					<li><input id="updateData" type="text" class="form-control"
-						placeholder="Änderung eingeben ..."></li>
-					<li><img src="./res/img/hand.jpg" alt="..."
-						class="img-rounded"></li>
-				</ul>
+			<div id="toggleDivUpdate">
+				<div class="col-md-4">
+					<input id="updateData" type="text" class="form-control"
+						placeholder="Änderung eingeben ...">
+				</div>
+				<div class="col-md-2">
+					<button type="button" class="btn btn-default btn-md"
+						disabled="disabled">Drag!</button>
+				</div>
 			</div>
 		</div>
 		<p />

@@ -164,7 +164,7 @@ span[data-update] {
 						placeholder="Änderung eingeben ...">
 				</div>
 				<div class="col-md-2">
-					<button type="button" class="btn btn-default btn-md"
+					<button type="button" class="btn btn-default btn-lg"
 						disabled="disabled">Drag!</button>
 				</div>
 			</div>
