@@ -186,14 +186,14 @@ span[data-update] {
 							for (Todo t : todoList) {
 						%>
 						<tr>
-							<td ><%=t.getId()%></td>
-							<td id="droppableDiv"><%=t.getTodo()%></td>
+							<td data-update="updateField"><%=t.getId()%></td>
+							<td data-update="updateField" id="droppableDiv"><%=t.getTodo()%></td>
 
 							<td>
 								<div>
 									<span data-id="<%=t.getId()%>" data-delete="delete"
 										data-type="cursor" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-									<span data-IDUpdate="<%=t.getId()%>" data-update="update"
+									<span data-IDUpdate="<%=t.getId()%>" 
 										data-type="cursor" class="glyphicon glyphicon-pencil"></span>
 								</div>
 							</td>
