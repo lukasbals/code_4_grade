@@ -1,7 +1,9 @@
 INDEX VERSION 1.127
+/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/525585692.index
+/01_Web_Basics/src
 /Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/432539360.index
 /05_TodoApp/src
 /Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1275537612.index
 /04_7bwi_student/src
-/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/525585692.index
-/01_Web_Basics/src
+/Users/lukibals/GitHub/code_4_grade/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/188627826.index
+/06_TestFTP/src
