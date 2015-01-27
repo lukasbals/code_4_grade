@@ -1,0 +1,5 @@
+package at.bals.taskservice.vo;
+
+public class Task {
+
+}

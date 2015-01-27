@@ -1,0 +1,5 @@
+package at.bals.taskservice.server;
+
+public class TaskServer {
+
+}
