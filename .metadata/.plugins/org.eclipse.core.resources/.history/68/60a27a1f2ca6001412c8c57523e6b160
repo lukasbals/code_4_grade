@@ -1,0 +1,28 @@
+package at.bals.tastkservice.services;
+
+import java.util.ArrayList;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.sun.jmx.snmp.tasks.Task;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
+@Path("taks")
+public class TaskService {
+	@GET
+	@Path("")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_ATOM_XML })
+	public List<Task> getAllTasks() {
+		Task t1 = new Task("do it", "now");
+		Task t2 = new Task("dont do it", "never");
+
+		List<Task> taskList = new ArrayList<Taskt>();
+		taskList.add(t1);
+		taskList.add(t2);
+
+		return taskList;
+	}
+}

@@ -1,0 +1,9 @@
+package at.bals.tastkservice.services;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+@Path("taks")
+public class TaskService {
+
+}

@@ -1,0 +1,11 @@
+package at.bals.taskservice.server;
+
+import com.sun.jersey.api.container.httpserver.HttpServerFactory;
+import com.sun.net.httpserver.HttpServer;
+
+public class TaskServer {
+	public static void main(String[] args) {
+		HttpServer server = HttpServerFactory.create("http://localhost:8081/");
+		server.start();
+	}
+}
