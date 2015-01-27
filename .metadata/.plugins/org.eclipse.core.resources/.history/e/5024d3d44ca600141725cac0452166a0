@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -36,21 +35,18 @@ public class TaskService {
 		return taskList;
 	}
 
-	@GET
-	// @POST
+	@POST
 	@Path("add/")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	// @Consumes(MediaType.APPLICATION_XML)
-	public int addTask() {
-		try {
-			Statement stmt = this.connection.createStatement();
-			stmt.executeUpdate("insert into firstRest.firstRest (name, beschreibung) VALUES ('asdf', 'asdf');");
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public List<newTask> newTask() {
+
+		if (this.connection == null) {
+			setConnection();
 		}
-		return 0;
+
+		getData();
+
+		return newTaskList;
 	}
 
 	private void getData() {

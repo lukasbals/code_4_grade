@@ -41,7 +41,7 @@ public class TaskService {
 	@Path("add/")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	// @Consumes(MediaType.APPLICATION_XML)
-	public int addTask() {
+	public void addTask() {
 		try {
 			Statement stmt = this.connection.createStatement();
 			stmt.executeUpdate("insert into firstRest.firstRest (name, beschreibung) VALUES ('asdf', 'asdf');");
@@ -50,7 +50,6 @@ public class TaskService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
 	}
 
 	private void getData() {

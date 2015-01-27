@@ -36,21 +36,12 @@ public class TaskService {
 		return taskList;
 	}
 
-	@GET
-	// @POST
+	@POST
 	@Path("add/")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	// @Consumes(MediaType.APPLICATION_XML)
-	public int addTask() {
-		try {
-			Statement stmt = this.connection.createStatement();
-			stmt.executeUpdate("insert into firstRest.firstRest (name, beschreibung) VALUES ('asdf', 'asdf');");
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;
+	@Consumes(MediaType.APPLICATION_XML)
+	public void addTask() {
+
 	}
 
 	private void getData() {
