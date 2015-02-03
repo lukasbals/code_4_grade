@@ -41,7 +41,7 @@ public class TaskService {
 
 	@POST
 	@Path("")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	// @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes(MediaType.APPLICATION_XML)
 	public Response addTask(Task task) {
 		try {

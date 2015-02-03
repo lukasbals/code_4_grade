@@ -23,7 +23,12 @@
 			deleteTask(id);
 		});
 		
-		
+		$("#insert").click(function(){
+			var name = $("#name").val();
+			var description = $("#description").val();
+			insertData(description, name);
+			
+		});
 		
 	});
 	
@@ -47,31 +52,50 @@
 	
 	function loadData() {
 		$.ajax({
-		headers : {
-			Accept : 'application/json'
-		},
-		type : 'GET',
-		url : '<%=request.getContextPath()%>/rest/tasks',
-					success : function(data) {
-						var myHTML = '';
-						data.task
-								.forEach(function(t) {
-									myHTML = myHTML
-											+ "<tr><th>"
+			headers : {
+				Accept : 'application/json'
+			},
+			type : 'GET',
+			url : '<%=request.getContextPath()%>/rest/tasks',
+			statusCode:{
+				200 : function(data) {
+					var myHTML = '';
+					data.task.forEach(function(t) {
+						myHTML = myHTML		+ "<tr><th>"
 											+ t.id
 											+ "</th><td>"
 											+ t.name
 											+ "</td><td>"
 											+ t.description
-											+ "</td><td><button data-id='" + t.id + "'class='btn btn-md btn-danger' id='delete'>Delete</button></td</tr>";
+											+ "</td><td><button data-id='"
+											+ t.id
+											+ "'class='btn btn-md btn-danger' id='delete'>Delete</button></td</tr>";
 								});
 
 						$("#data").html(myHTML);
-					},
-					error : function(data) {
-						console.log(data);
+				}
+			}
+		});
+	}
+	
+	
+	function insertData(description, name){
+		var postData = '{xml:escape("<task><description>Hallo</description><name>Lukas</name></task>")}';
+			$.ajax({
+				headers:{
+					Accept : 'application/xml',
+					ContentType : 'application/xml'
+				},
+				type : 'POST',
+				url:'<%=request.getContextPath()%>/rest/tasks',
+				data : postData,
+				statusCode : {
+					201 : function(data) {
+						alert("works");
+						loadData();
 					}
-				});
+				}
+			});
 	}
 </script>
 
@@ -85,7 +109,20 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<button class="btn btn-md btn-primary" id="load">Load data</button>
+				<button class="btn btn-md btn-primary" id="load">Neuladen</button>
+			</div>
+		</div>
+		<p />
+		<div class="row">
+			<div class="col-md-2">
+				<button id="insert" class="btn btn-md btn-success">Einfügen</button>
+			</div>
+			<div class="col-md-2">
+				<input id="name" type="text" class="form-control" placeholder="Name">
+			</div>
+			<div class="col-md-2">
+				<input id="description" type="text" class="form-control"
+					placeholder="Beschreibung">
 			</div>
 		</div>
 		<p />
