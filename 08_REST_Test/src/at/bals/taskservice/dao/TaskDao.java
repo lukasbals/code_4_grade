@@ -14,7 +14,8 @@ public class TaskDao {
 	private Connection connection;
 
 	/**
-	 *  Returns all Tasks from the Database
+	 * Returns all Tasks from the Database
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -37,6 +38,12 @@ public class TaskDao {
 		return taskList;
 	}
 
+	/**
+	 * Inserts one Task
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public void insertData(Task t) throws SQLException {
 		if (this.connection == null) {
 			setConnection();

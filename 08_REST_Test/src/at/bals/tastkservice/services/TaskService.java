@@ -21,7 +21,7 @@ import at.bals.taskservice.vo.Task;
 
 @Path("tasks/")
 public class TaskService {
-	private Connection connection;
+	// private Connection connection;
 	private List<Task> taskList = new ArrayList<Task>();
 
 	@GET
@@ -30,26 +30,9 @@ public class TaskService {
 	public List<Task> getAllTasks() {
 		taskList.clear();
 		try {
-			// taskList.clear();
-			// if (this.connection == null) {
-			// setConnection();
-			// }
-			//
-			// Statement stmt = this.connection.createStatement();
-			// ResultSet resultSet =
-			// stmt.executeQuery("select * from firstRest;");
-			// resultSet.first();
-			// while (!(resultSet.isAfterLast())) {
-			// Task t = new Task(resultSet.getInt(1), resultSet.getString(2),
-			// resultSet.getString(3));
-			// taskList.add(t);
-			// resultSet.next();
-			// }
-			// stmt.close();
-
 			TaskDao dao = new TaskDao();
 			// List<Task> taskList =
-			dao.getData();
+			this.taskList = dao.getData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,19 +56,4 @@ public class TaskService {
 		}
 
 	}
-
-	// private void setConnection() {
-	// try {
-	// Class.forName("com.mysql.jdbc.Driver");
-	// this.connection = DriverManager
-	// .getConnection("jdbc:mysql://172.16.19.136/firstRest?user=firstRest&password=lukibals");
-	// } catch (ClassNotFoundException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// }
 }
