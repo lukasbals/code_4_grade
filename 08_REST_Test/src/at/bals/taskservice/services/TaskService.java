@@ -1,4 +1,4 @@
-package at.bals.tastkservice.services;
+package at.bals.taskservice.services;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ public class TaskService {
 		taskList.clear();
 		try {
 			TaskDao dao = new TaskDao();
-			// List<Task> taskList =
 			this.taskList = dao.getData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -45,7 +44,6 @@ public class TaskService {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes(MediaType.APPLICATION_XML)
 	public Response addTask(Task task) {
-
 		try {
 			TaskDao dao = new TaskDao();
 			dao.insertData(task);
