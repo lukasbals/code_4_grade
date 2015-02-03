@@ -11,6 +11,10 @@ import java.util.List;
 import at.bals.taskservice.vo.Task;
 
 public class TaskDao {
+	private static final String ipAddress = "172.16.19.136";
+	private static final String databaseName = "firstRest";
+	private static final String userName = "firstRest";
+	private static final String password = "lukibals";
 	private Connection connection;
 
 	/**
@@ -35,6 +39,7 @@ public class TaskDao {
 			resultSet.next();
 		}
 		stmt.close();
+		connection.close();
 		return taskList;
 	}
 
@@ -55,11 +60,15 @@ public class TaskDao {
 		connection.close();
 	}
 
+	/**
+	 * Sets a connection to the database
+	 */
 	private void setConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager
-					.getConnection("jdbc:mysql://172.16.19.136/firstRest?user=firstRest&password=lukibals");
+			this.connection = DriverManager.getConnection("jdbc:mysql://"
+					+ ipAddress + "/" + databaseName + "?user=" + userName
+					+ "&password=" + password + "");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
