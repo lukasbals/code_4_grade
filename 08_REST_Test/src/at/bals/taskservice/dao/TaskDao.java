@@ -61,6 +61,40 @@ public class TaskDao {
 	}
 
 	/**
+	 * Deletes one Task
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public void deleteData(Integer id) throws SQLException {
+		if (this.connection == null) {
+			setConnection();
+		}
+		Statement stmt = this.connection.createStatement();
+		stmt.executeUpdate("delete from firstRest where id=" + id + ";");
+		stmt.close();
+		connection.close();
+	}
+
+	/**
+	 * Updates one Task
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public void updateData(Task t, Integer id) throws SQLException {
+		if (this.connection == null) {
+			setConnection();
+		}
+		Statement stmt = this.connection.createStatement();
+		stmt.executeUpdate("update firstRest set name='" + t.getName()
+				+ "', beschreibung='" + t.getDescription() + "' where id="
+				+ t.getId() + ";");
+		stmt.close();
+		connection.close();
+	}
+
+	/**
 	 * Sets a connection to the database
 	 */
 	private void setConnection() {

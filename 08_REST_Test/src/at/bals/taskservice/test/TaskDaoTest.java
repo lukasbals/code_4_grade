@@ -43,12 +43,19 @@ public class TaskDaoTest {
 		}
 
 	}
-	
+
 	@Test
-	public void testUpateData() {
-		
-			fail();
-		
+	public void testDeleteData() {
+		try {
+			TaskDao dao = new TaskDao();
+			int id = 15;
+			dao.deleteData(id);
+
+			Assert.assertTrue(true);
+
+		} catch (SQLException e) {
+			fail(e.getMessage());
+		}
 
 	}
 
