@@ -27,7 +27,6 @@
 			var name = $("#name").val();
 			var description = $("#description").val();
 			insertData(description, name);
-			
 		});
 		
 	});
@@ -81,21 +80,21 @@
 	
 	function insertData(description, name){
 		var postData = '{xml:escape("<task><description>Hallo</description><name>Lukas</name></task>")}';
-			$.ajax({
+		$.ajax({
 				headers:{
 					Accept : 'application/xml',
 					ContentType : 'application/xml'
 				},
 				type : 'POST',
 				url:'<%=request.getContextPath()%>/rest/tasks',
-				data : postData,
-				statusCode : {
-					201 : function(data) {
-						alert("works");
-						loadData();
-					}
+			data : postData,
+			statusCode : {
+				201 : function(data) {
+					alert("works");
+					loadData();
 				}
-			});
+			}
+		});
 	}
 </script>
 
