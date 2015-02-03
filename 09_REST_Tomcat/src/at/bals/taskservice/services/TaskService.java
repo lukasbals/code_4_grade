@@ -25,7 +25,7 @@ public class TaskService {
 
 	@GET
 	@Path("")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public List<Task> getAllTasks() {
 		taskList.clear();
 		try {
