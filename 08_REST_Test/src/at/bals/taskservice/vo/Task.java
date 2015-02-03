@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Task {
+	private int id;
 	private String name;
 	private String description;
 
@@ -11,10 +12,19 @@ public class Task {
 
 	}
 
-	public Task(String name, String description) {
+	public Task(int id, String name, String description) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
