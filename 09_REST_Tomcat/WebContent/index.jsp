@@ -11,28 +11,68 @@
 
 <script>
 	$(function() {
-		$("#load")
-			.click(
-				function() {
-					$.ajax({
-						headers : {
-							Accept : 'application/json'
-						},
-						type : 'GET',
-						url : '<%=request.getContextPath()%>/rest/tasks',
-        success: function(data) {
-          var myHTML = '';
-          data.task.forEach(function(t) {
-            myHTML = myHTML + "<tr><th>" + t.id + "</th><th>" + t.name + "</th><th>" + t.description + "</th></tr>";
-          });
-          $("#data").html(myHTML);
-        },
-        error: function(data) {
-          console.log(data);
-        }
-      });
-    });
-  });
+		loadData();
+		//setInterval(function(){loadData()},1000);
+		
+ 		$("#load").click(function(){
+ 			loadData();
+		});
+ 		
+		$("tbody").on("click","button",function(){
+			var id = $(this).attr("data-id");
+			deleteTask(id);
+		});
+		
+		
+		
+	});
+	
+	function deleteTask(id){
+		$.ajax({
+	        headers: {
+	          Accept: 'application/json'
+	        },
+	        type: 'DELETE',
+	        url:'<%=request.getContextPath()%>/rest/tasks/' + id,
+			statusCode :{
+				200: function(data) {
+					//alert("works");
+					loadData();
+					
+				}
+				
+			} 
+		});
+	}
+	
+	function loadData() {
+		$.ajax({
+		headers : {
+			Accept : 'application/json'
+		},
+		type : 'GET',
+		url : '<%=request.getContextPath()%>/rest/tasks',
+					success : function(data) {
+						var myHTML = '';
+						data.task
+								.forEach(function(t) {
+									myHTML = myHTML
+											+ "<tr><th>"
+											+ t.id
+											+ "</th><td>"
+											+ t.name
+											+ "</td><td>"
+											+ t.description
+											+ "</td><td><button data-id='" + t.id + "'class='btn btn-md btn-danger' id='delete'>Delete</button></td</tr>";
+								});
+
+						$("#data").html(myHTML);
+					},
+					error : function(data) {
+						console.log(data);
+					}
+				});
+	}
 </script>
 
 </head>
@@ -48,6 +88,7 @@
 				<button class="btn btn-md btn-primary" id="load">Load data</button>
 			</div>
 		</div>
+		<p />
 
 		<div class="row">
 			<div class="col-md-12">
