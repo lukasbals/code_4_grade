@@ -9,6 +9,12 @@
 <link href="./res/css/bootstrap.min.css" rel="stylesheet">
 <link href="./res/css/jquery-ui.min.css" rel="stylesheet">
 
+<style>
+#loadIcon{
+	display:none;
+}
+</style>
+
 <script>
 	$(function() {
 		loadData();
@@ -27,6 +33,8 @@
 			var name = $("#name").val();
 			var description = $("#description").val();
 			insertData(description, name);
+			$("#name").val('');
+			$("#description").val('');
 		});
 		
 	});
@@ -70,7 +78,6 @@
 											+ t.id
 											+ "'class='btn btn-md btn-danger' id='delete'>Delete</button></td</tr>";
 								});
-
 						$("#data").html(myHTML);
 				}
 			}
@@ -79,20 +86,29 @@
 	
 	
 	function insertData(description, name){
-		var postData = '{xml:escape("<task><description>Hallo</description><name>Lukas</name></task>")}';
+		var postData = {};
+		postData.description = description;
+		postData.name = name;
+		
 		$.ajax({
-				headers:{
-					Accept : 'application/xml',
-					ContentType : 'application/xml'
-				},
-				type : 'POST',
-				url:'<%=request.getContextPath()%>/rest/tasks',
-			data : postData,
+			dataType:'json',
+			contentType : 'application/json',
+			type : 'POST',
+			url:'<%=request.getContextPath()%>/rest/tasks',
+			data :JSON.stringify(postData),
 			statusCode : {
 				201 : function(data) {
-					alert("works");
+					//alert("works");
 					loadData();
 				}
+			},
+			beforeSend:function(){
+				//alert("before");
+				$("#loadIcon").toggle();
+			},
+			complete: function(){
+				// Handle the complete event
+				$("#loadIcon").toggle();
 			}
 		});
 	}
@@ -122,6 +138,9 @@
 			<div class="col-md-2">
 				<input id="description" type="text" class="form-control"
 					placeholder="Beschreibung">
+			</div>
+			<div class="col-md-2">
+				<img id="loadIcon" src="./res/img/loading.gif" alt="..." class="img-rounded">
 			</div>
 		</div>
 		<p />

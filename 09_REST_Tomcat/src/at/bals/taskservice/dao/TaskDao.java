@@ -11,7 +11,7 @@ import java.util.List;
 import at.bals.taskservice.vo.Task;
 
 public class TaskDao {
-	private static final String ipAddress = "172.16.19.136";
+	private static final String ipAddress = "172.16.19.138";
 	private static final String databaseName = "firstRest";
 	private static final String userName = "firstRest";
 	private static final String password = "lukibals";
