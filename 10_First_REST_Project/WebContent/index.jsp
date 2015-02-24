@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Einkausliste</title>
+<title>Einkaufsliste</title>
 <script src="./res/js/jquery-1.11.1.min.js"></script>
 <script src="./res/js/jquery-ui.min.js"></script>
 <link href="./res/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,6 @@
 			$(".number").css("background","white").show();
 		});
 		
-		$(document).ready(function () {
 			  $(".number").keypress(function (e) {
 			    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
 			        $("#errmsg").html("Bitte nur Nummern eintippen").show().fadeOut(4000);
@@ -55,7 +54,19 @@
 		               return true;
 			    }
 			});
-		});
+		
+		var numberForInput = $("#numberForInput").val();
+		
+		$("#draggable").draggable();
+		
+		//$(".numberField").droppable({
+		//	drop: function(e,ui){
+		//		alert("in");
+		//	}
+		//});
+		//$("tbody").on("droppable", "numberField",function(){
+		//	alert("in");
+		//});
 		
 		function loadData() {
 			$.ajax({
@@ -127,10 +138,6 @@
 				}
 			});
 		}
-		
-		$('#draggable').bind('drag',function( event ){
-                $(".numberField").css("background", "green");
-                });
 	});
 </script>
 
@@ -176,8 +183,8 @@
 						aria-hidden="true"></span>
 				</div>
 				<div class="col-md-1">
-					<input name="quantity" type="text" class="number form-control"
-						placeholder="Anzahl">
+					<input id="numberForInput" name="quantity" type="text"
+						class="number form-control" placeholder="Anzahl">
 				</div>
 			</div>
 		</div>
