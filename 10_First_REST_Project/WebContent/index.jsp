@@ -21,6 +21,19 @@
 #draggIcon {
 	cursor: hand;
 }
+
+.hover {
+	background-color: gray;
+}
+
+.droppable{
+	height:35px;
+}
+
+#draggable {
+	background-color: gray;
+	height:33px;
+}
 </style>
 
 <script>
@@ -59,14 +72,12 @@
 		
 		$("#draggable").draggable();
 		
-		//$(".numberField").droppable({
-		//	drop: function(e,ui){
-		//		alert("in");
-		//	}
-		//});
-		//$("tbody").on("droppable", "numberField",function(){
-		//	alert("in");
-		//});
+		$(".droppable").droppable({
+			hoverClass: "hover",
+			drop : function(e, ui){
+				alert("in");
+			}
+		});
 		
 		function loadData() {
 			$.ajax({
@@ -82,7 +93,7 @@
 											myHTML = myHTML
 													+ "<tr><td>"
 													+ i.name
-													+ "</td><td class='numberField' data-idNumber='"
+													+ "</td><td class='droppable' data-idNumber='"
 													+i.id
 													+ "'>"
 													+ i.quantity
@@ -144,6 +155,8 @@
 </head>
 <body>
 	<div class="container">
+		<div class="droppable row">droppable</div>
+
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Einkausliste</h1>
@@ -177,14 +190,16 @@
 			<div class="col-md-2">
 				<p class="lead">Neue Anzahl:</p>
 			</div>
-			<div id="draggable">
-				<div class="col-md-1">
-					<span id="draggIcon" class="right lead glyphicon glyphicon-hand-up"
-						aria-hidden="true"></span>
-				</div>
-				<div class="col-md-1">
-					<input id="numberForInput" name="quantity" type="text"
-						class="number form-control" placeholder="Anzahl">
+			<div class="col-md-2">
+				<div id="draggable">
+					<div class="col-md-3">
+						<span id="draggIcon"
+							class="right lead glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+					</div>
+					<div class="col-md-9">
+						<input id="numberForInput" name="quantity" type="text"
+							class="number form-control" placeholder="Anzahl">
+					</div>
 				</div>
 			</div>
 		</div>
