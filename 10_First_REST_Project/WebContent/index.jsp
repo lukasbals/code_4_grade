@@ -57,12 +57,6 @@
 			});
 		});
 		
-		$(function() {
-		    $( "#draggable" ).draggable(function(){
-		    	$(".numberField").css("background", "red").show();
-		    });
-		});
-		
 		function loadData() {
 			$.ajax({
 				headers : {
@@ -133,6 +127,10 @@
 				}
 			});
 		}
+		
+		$('#draggable').bind('drag',function( event ){
+                $(".numberField").css("background", "green");
+                });
 	});
 </script>
 
