@@ -13,12 +13,19 @@
 #loadIcon {
 	display: none;
 }
+
+.right {
+	float: right;
+}
+
+#draggIcon {
+	cursor: hand;
+}
 </style>
 
 <script>
 	$(function() {
 		loadData();
-		$("#datepicker").datepicker();
 		
 		$("tbody").on("click","button",function(){
 			var id = $(this).attr("data-id");
@@ -28,10 +35,32 @@
 		$("#insert").click(function(){
 			var name = $("#name").val();
 			var quantity = $("#quantity").val();
-			//alert(quantity);
+			if ((!name) || (quantity == 0)){
+				alert("Beschreibung oder Anzahl fehlt!");
+				return;
+			}
 			insertData(quantity, name);
 			$("#name").val('');
 			$("#quantity").val('');
+			$(".number").css("background","white").show();
+		});
+		
+		$(document).ready(function () {
+			  $(".number").keypress(function (e) {
+			    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			        $("#errmsg").html("Bitte nur Nummern eintippen").show().fadeOut(4000);
+			               return false;
+			    }else{
+			    	$(".number").css("background","lightgreen").show();
+		               return true;
+			    }
+			});
+		});
+		
+		$(function() {
+		    $( "#draggable" ).draggable(function(){
+		    	$(".numberField").css("background", "red").show();
+		    });
 		});
 		
 		function loadData() {
@@ -44,16 +73,17 @@
 						statusCode : {
 							200 : function(data) {
 								var myHTML = '';
-								data.task
-										.forEach(function(t) {
+								data.item.forEach(function(i) {
 											myHTML = myHTML
 													+ "<tr><td>"
-													+ t.name
-													+ "</td><td>"
-													+ t.quantity
+													+ i.name
+													+ "</td><td class='numberField' data-idNumber='"
+													+i.id
+													+ "'>"
+													+ i.quantity
 													+ "</td><td><button data-id='"
-												+ t.id
-												+ "'class='btn btn-md btn-success' id='delete'>Erledigt</button></td</tr>";
+												+ i.id
+												+ "'class='btn btn-sm btn-success' id='delete'>Erledigt</button></td</tr>";
 										});
 								$("#data").html(myHTML);
 							}
@@ -126,15 +156,31 @@
 					placeholder="Beschreibung">
 			</div>
 			<div class="col-md-1">
-				<input id="quantity" type="text" class="form-control"
-					placeholder="Anzahl">
+				<input id="quantity" name="quantity" type="text"
+					class="number form-control" placeholder="Anzahl">
 			</div>
-			<div class="col-md-2">
-				<button id="insert" class="btn btn-md btn-success">Einfügen</button>
+			<div class="col-md-1">
+				<button id="insert" class="btn btn-md btn-primary">Einfügen</button>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<img id="loadIcon" src="./res/img/loading.gif" alt="..."
 					class="img-rounded">
+			</div>
+			<div class="col-md-3">
+				<span id="errmsg"></span>
+			</div>
+			<div class="col-md-2">
+				<p class="lead">Neue Anzahl:</p>
+			</div>
+			<div id="draggable">
+				<div class="col-md-1">
+					<span id="draggIcon" class="right lead glyphicon glyphicon-hand-up"
+						aria-hidden="true"></span>
+				</div>
+				<div class="col-md-1">
+					<input name="quantity" type="text" class="number form-control"
+						placeholder="Anzahl">
+				</div>
 			</div>
 		</div>
 		<p />

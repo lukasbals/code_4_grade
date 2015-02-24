@@ -11,7 +11,7 @@ import org.junit.Test;
 import at.bals.taskservice.dao.ItemDao;
 import at.bals.taskservice.vo.Item;
 
-public class TaskDaoTest {
+public class ItemDaoTest {
 
 	@Test
 	public void testGetData() {
@@ -26,7 +26,6 @@ public class TaskDaoTest {
 		} catch (SQLException e) {
 			fail(e.getMessage());
 		}
-
 	}
 
 	@Test
