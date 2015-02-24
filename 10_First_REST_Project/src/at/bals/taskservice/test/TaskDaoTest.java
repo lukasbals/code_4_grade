@@ -8,16 +8,16 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import at.bals.taskservice.dao.TaskDao;
-import at.bals.taskservice.vo.Task;
+import at.bals.taskservice.dao.ItemDao;
+import at.bals.taskservice.vo.Item;
 
 public class TaskDaoTest {
 
 	@Test
 	public void testGetData() {
 		try {
-			TaskDao dao = new TaskDao();
-			List<Task> taskList = dao.getData();
+			ItemDao dao = new ItemDao();
+			List<Item> taskList = dao.getData();
 			if (taskList.size() > 0) {
 				Assert.assertTrue(true);
 			} else {
@@ -32,8 +32,8 @@ public class TaskDaoTest {
 	@Test
 	public void testInsertData() {
 		try {
-			TaskDao dao = new TaskDao();
-			Task t = new Task(0, "hans", "hans");
+			ItemDao dao = new ItemDao();
+			Item t = new Item(0, "hans", 3);
 			dao.insertData(t);
 
 			Assert.assertTrue(true);
@@ -47,7 +47,7 @@ public class TaskDaoTest {
 	@Test
 	public void testDeleteData() {
 		try {
-			TaskDao dao = new TaskDao();
+			ItemDao dao = new ItemDao();
 			int id = 15;
 			dao.deleteData(id);
 

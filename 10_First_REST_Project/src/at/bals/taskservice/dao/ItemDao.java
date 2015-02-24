@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import at.bals.taskservice.vo.Task;
+import at.bals.taskservice.vo.Item;
 
-public class TaskDao {
+public class ItemDao {
 	private static final String ipAddress = "172.16.19.138";
 	private static final String databaseName = "firstRest";
 	private static final String userName = "firstRest";
@@ -23,18 +23,18 @@ public class TaskDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Task> getData() throws SQLException {
-		List<Task> taskList = new ArrayList<Task>();
+	public List<Item> getData() throws SQLException {
+		List<Item> taskList = new ArrayList<Item>();
 		if (this.connection == null) {
 			setConnection();
 		}
 
 		Statement stmt = this.connection.createStatement();
-		ResultSet resultSet = stmt.executeQuery("select * from firstRest;");
+		ResultSet resultSet = stmt.executeQuery("select * from shoppingList;");
 		resultSet.first();
 		while (!(resultSet.isAfterLast())) {
-			Task t = new Task(resultSet.getInt(1), resultSet.getString(2),
-					resultSet.getString(3));
+			Item t = new Item(resultSet.getInt(1), resultSet.getString(2),
+					resultSet.getInt(3));
 			taskList.add(t);
 			resultSet.next();
 		}
@@ -49,13 +49,13 @@ public class TaskDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public void insertData(Task t) throws SQLException {
+	public void insertData(Item t) throws SQLException {
 		if (this.connection == null) {
 			setConnection();
 		}
 		Statement stmt = this.connection.createStatement();
-		stmt.executeUpdate("insert into firstRest.firstRest (name, beschreibung) VALUES ('"
-				+ t.getName() + "', '" + t.getDescription() + "');");
+		stmt.executeUpdate("insert into firstRest.shoppingList (name, quantity) VALUES ('"
+				+ t.getName() + "', '" + t.getQuantity() + "');");
 		stmt.close();
 		connection.close();
 	}
@@ -71,7 +71,7 @@ public class TaskDao {
 			setConnection();
 		}
 		Statement stmt = this.connection.createStatement();
-		stmt.executeUpdate("delete from firstRest where id=" + id + ";");
+		stmt.executeUpdate("delete from shoppingList where id=" + id + ";");
 		stmt.close();
 		connection.close();
 	}
@@ -82,13 +82,13 @@ public class TaskDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public void updateData(Task t, Integer id) throws SQLException {
+	public void updateData(Item t, Integer id) throws SQLException {
 		if (this.connection == null) {
 			setConnection();
 		}
 		Statement stmt = this.connection.createStatement();
 		stmt.executeUpdate("update firstRest set name='" + t.getName()
-				+ "', beschreibung='" + t.getDescription() + "' where id="
+				+ "', quantity='" + t.getQuantity() + "' where id="
 				+ t.getId() + ";");
 		stmt.close();
 		connection.close();

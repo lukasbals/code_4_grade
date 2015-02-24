@@ -3,20 +3,21 @@ package at.bals.taskservice.vo;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Task {
+public class Item {
 	private int id;
 	private String name;
-	private String description;
+	private int quantity;
+	
 
-	public Task() {
+	public Item() {
 
 	}
 
-	public Task(int id, String name, String description) {
+	public Item(int id, String name, int quantity) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.description = description;
+		this.quantity = quantity;
 	}
 
 	public int getId() {
@@ -35,11 +36,12 @@ public class Task {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
+	
 }

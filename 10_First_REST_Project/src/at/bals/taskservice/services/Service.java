@@ -15,38 +15,37 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import at.bals.taskservice.dao.TaskDao;
-import at.bals.taskservice.vo.Task;
+import at.bals.taskservice.dao.ItemDao;
+import at.bals.taskservice.vo.Item;
 
 @Path("tasks/")
-public class TaskService {
+public class Service {
 	// private Connection connection;
-	private List<Task> taskList = new ArrayList<Task>();
+	private List<Item> itemList = new ArrayList<Item>();
 
 	@GET
 	@Path("")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public List<Task> getAllTasks() {
-		taskList.clear();
+	public List<Item> getAllTasks() {
+		itemList.clear();
 		try {
-			TaskDao dao = new TaskDao();
-			this.taskList = dao.getData();
+			ItemDao dao = new ItemDao();
+			this.itemList = dao.getData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return taskList;
+		return itemList;
 	}
 
 	@POST
 	@Path("")
 	// @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response addTask(Task task) {
+	public Response addTask(Item item) {
 		try {
-			TaskDao dao = new TaskDao();
-			dao.insertData(task);
+			ItemDao dao = new ItemDao();
+			dao.insertData(item);
 			return Response.status(201).build();
 		} catch (SQLException e) {
 			return Response.status(400).build();
@@ -58,7 +57,7 @@ public class TaskService {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response deleteTask(@PathParam("id") int id) {
 		try {
-			TaskDao dao = new TaskDao();
+			ItemDao dao = new ItemDao();
 			dao.deleteData(id);
 			return Response.status(200).build();
 		} catch (SQLException e) {
@@ -69,9 +68,9 @@ public class TaskService {
 	@PUT
 	@Path("{id}/")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateTask(Task task, @PathParam("id") int id) {
+	public Response updateTask(Item task, @PathParam("id") int id) {
 		try {
-			TaskDao dao = new TaskDao();
+			ItemDao dao = new ItemDao();
 			task.setId(id);
 			dao.updateData(task, id);
 			return Response.status(200).build();
