@@ -12,8 +12,22 @@
 .droppable {
 	background: lightblue;
 }
+
+.dropped {
+	background: green;
+}
+
 #droppable {
 	background: lightgreen;
+}
+
+.hover{
+	background-color: gray;
+}
+
+.draging{
+	background-color: blue;
+	width:100px;
 }
 </style>
 
@@ -23,25 +37,28 @@
 
 		var number = $("#number").val();
 
-		$("#droppable").droppable({
-			drop : function(event, ui) {
-				alert("IN");
-				$(".droppable").val(number);
+		$("#data tr td ").droppable({
+			hoverClass: "hover",
+			drop : function(e, ui){
+				alert("in");
 			}
 		});
 	});
+
+	
 </script>
 </head>
 <body>
 	<div class="container">
 		<p />
 		<div class="row">
-			<div id="draggable">
+			<div id="draggable" class="draging">
 				<span>Drag</span> <input id="number" placeholder="Numbers">
 			</div>
 		</div>
 		<p />
 		<div class="row">
+		
 			<table class="table">
 				<thead>
 					<tr>
@@ -51,9 +68,9 @@
 					</tr>
 				</thead>
 				<tbody id="data">
-					<tr>
+					<tr class="droppable">
 						<td>hans</td>
-						<td id="droppable" data-idnumber="3">3</td>
+						<td><div class="droppable">3</div></td>
 						<td><button data-id="3" class="btn btn-sm btn-success"
 								id="delete">Erledigt</button></td>
 					</tr>
