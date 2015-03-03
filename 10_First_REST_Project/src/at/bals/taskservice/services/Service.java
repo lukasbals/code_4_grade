@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 import at.bals.taskservice.dao.ItemDao;
 import at.bals.taskservice.vo.Item;
 
-@Path("tasks/")
+@Path("items/")
 public class Service {
 	//Arraylist erstellen
 	private List<Item> itemList = new ArrayList<Item>();

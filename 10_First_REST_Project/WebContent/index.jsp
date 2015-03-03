@@ -90,7 +90,7 @@
 					Accept : 'application/json'
 				},
 				type : 'GET',
-				url : '<%=request.getContextPath()%>/rest/tasks',
+				url : '<%=request.getContextPath()%>/rest/items',
 						statusCode : {
 							200 : function(data) {
 								var myHTML = '';
@@ -104,7 +104,7 @@
 													+ i.quantity
 													+ "</td><td><button data-id='"
 												+ i.id
-												+ "' class='done btn btn-sm btn-success'>Erledigt</button><div class='input-group'><input type='text' class='updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
+												+ "' class='done btn btn-md btn-success'>Erledigt</button><div class='input-group'><input type='text' class='updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
 												+i.id
 												+"' type='button'>Neu</button></span> </div></td</tr>";
 										});
@@ -121,7 +121,7 @@
 		          Accept: 'application/json'
 		        },
 		        type: 'DELETE',
-		        url:'<%=request.getContextPath()%>/rest/tasks/' + id,
+		        url:'<%=request.getContextPath()%>/rest/items/' + id,
 				statusCode : {
 					200 : function(data) {
 						//alert("works");
@@ -140,7 +140,7 @@
 				dataType:'json',
 				contentType : 'application/json',
 				type : 'POST',
-				url:'<%=request.getContextPath()%>/rest/tasks',
+				url:'<%=request.getContextPath()%>/rest/items',
 				data : JSON.stringify(postData),
 				statusCode : {
 					201 : function(data) {
@@ -167,7 +167,7 @@
 				dataType:'json',
 				contentType:'application/json',
 				type:'PUT',
-				 url:'<%=request.getContextPath()%>/rest/tasks/' + idUpdate,
+				 url:'<%=request.getContextPath()%>/rest/items/' + idUpdate,
 				 data:JSON.stringify(putData),
 				 statusCode:{
 					 200:function(data){
@@ -202,11 +202,11 @@
 		</div>
 		<p />
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<input id="name" type="text" class="form-control"
 					placeholder="Beschreibung">
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-2">
 				<input id="quantity" name="quantity" type="text"
 					class="number form-control" placeholder="Anzahl">
 			</div>
