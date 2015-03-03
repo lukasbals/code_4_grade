@@ -68,11 +68,11 @@ public class Service {
 	@PUT
 	@Path("{id}/")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateTask(Item task, @PathParam("id") int id) {
+	public Response updateTask(Item i, @PathParam("id") int id) {
 		try {
 			ItemDao dao = new ItemDao();
-			task.setId(id);
-			dao.updateData(task, id);
+			i.setId(id);
+			dao.updateData(i);
 			return Response.status(200).build();
 		} catch (SQLException e) {
 			return Response.status(400).build();

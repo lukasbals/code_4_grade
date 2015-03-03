@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+
 import at.bals.taskservice.vo.Item;
 
 public class ItemDao {
@@ -25,10 +28,9 @@ public class ItemDao {
 	 */
 	public List<Item> getData() throws SQLException {
 		List<Item> taskList = new ArrayList<Item>();
-		if (this.connection == null) {
+		if (this.connection == null || this.connection.isClosed()) {
 			setConnection();
 		}
-
 		Statement stmt = this.connection.createStatement();
 		ResultSet resultSet = stmt.executeQuery("select * from shoppingList;");
 		resultSet.first();
@@ -44,13 +46,37 @@ public class ItemDao {
 	}
 
 	/**
+	 * Returns all Tasks from the Database
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public Item getItemForId(@PathParam("id") int id) throws SQLException {
+		Item item = null;
+		if (this.connection == null || this.connection.isClosed()) {
+			setConnection();
+		}
+		Statement stmt = this.connection.createStatement();
+		ResultSet resultSet = stmt
+				.executeQuery("select * from shoppingList where id=" + id);
+		resultSet.first();
+		if (!(resultSet.isAfterLast())) {
+			item = new Item(resultSet.getInt(1), resultSet.getString(2),
+					resultSet.getInt(3));
+		}
+		stmt.close();
+		connection.close();
+		return item;
+	}
+
+	/**
 	 * Inserts one Task
 	 * 
 	 * @return
 	 * @throws SQLException
 	 */
 	public void insertData(Item t) throws SQLException {
-		if (this.connection == null) {
+		if (this.connection == null || this.connection.isClosed()) {
 			setConnection();
 		}
 		Statement stmt = this.connection.createStatement();
@@ -67,7 +93,7 @@ public class ItemDao {
 	 * @throws SQLException
 	 */
 	public void deleteData(Integer id) throws SQLException {
-		if (this.connection == null) {
+		if (this.connection == null || this.connection.isClosed()) {
 			setConnection();
 		}
 		Statement stmt = this.connection.createStatement();
@@ -82,14 +108,14 @@ public class ItemDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public void updateData(Item t, Integer id) throws SQLException {
-		if (this.connection == null) {
+	public void updateData(Item i) throws SQLException {
+		if (this.connection == null || this.connection.isClosed()) {
 			setConnection();
 		}
 		Statement stmt = this.connection.createStatement();
-		stmt.executeUpdate("update firstRest set name='" + t.getName()
-				+ "', quantity='" + t.getQuantity() + "' where id="
-				+ t.getId() + ";");
+		stmt.executeUpdate("update shoppingList set quantity='"
+				+ i.getQuantity() + "' where id='" + i.getId() + "';");
+		System.out.println(stmt);
 		stmt.close();
 		connection.close();
 	}

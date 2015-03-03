@@ -55,7 +55,40 @@ public class ItemDaoTest {
 		} catch (SQLException e) {
 			fail(e.getMessage());
 		}
-
 	}
 
+	@Test
+	public void testGetItemById() {
+		ItemDao dao = new ItemDao();
+		try {
+			Item i = dao.getItemForId(18);
+			if (i.getName().equals("Klopapierrollen")) {
+				Assert.assertTrue(true);
+			} else {
+				fail();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testUpdateData() {
+		try {
+			ItemDao dao = new ItemDao();
+			Item i = dao.getItemForId(18);
+			int qu = i.getQuantity();
+			qu = qu + 1;
+			i.setQuantity(qu);
+			dao.updateData(i);
+			if (i.getQuantity() == qu) {
+				Assert.assertTrue(true);
+			} else {
+				fail();
+			}
+		} catch (SQLException e) {
+			fail(e.getMessage());
+		}
+	}
 }

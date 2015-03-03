@@ -12,27 +12,21 @@
 <style>
 #loadIcon {
 	display: none;
+	margin-left:30px;
 }
 
-.right {
-	float: right;
+#errmsg {
+	color: red;
+	font-style: italic;
 }
 
-#draggIcon {
-	cursor: hand;
+.input-group {
+	width: 120px;
 }
 
-.hover {
-	background-color: gray;
-}
-
-.droppable{
-	height:35px;
-}
-
-#draggable {
-	background-color: gray;
-	height:33px;
+.done {
+	float: left;
+	margin-right: 30px;
 }
 </style>
 
@@ -40,9 +34,18 @@
 	$(function() {
 		loadData();
 		
-		$("tbody").on("click","button",function(){
+		$("tbody").on("click",".done",function(){
 			var id = $(this).attr("data-id");
 			doneTask(id);
+		});
+		
+		$("tbody").on("click", ".update", function(){
+			var quantityUpdate = $( this ).parent().siblings(".updateNum").val();
+			var idUpdate = $(this).attr("data-idNum");
+			//alert("id: " + idUpdate);
+			//alert("eingegebener Wert:" + value);
+			updateData(idUpdate, quantityUpdate);
+			
 		});
 		
 		$("#insert").click(function(){
@@ -99,7 +102,9 @@
 													+ i.quantity
 													+ "</td><td><button data-id='"
 												+ i.id
-												+ "'class='btn btn-sm btn-success' id='delete'>Erledigt</button></td</tr>";
+												+ "' class='done btn btn-sm btn-success'>Erledigt</button><div class='input-group'><input type='text' class='updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
+												+i.id
+												+"' type='button'>Neu</button></span> </div></td</tr>";
 										});
 								$("#data").html(myHTML);
 							}
@@ -145,8 +150,33 @@
 				},
 				complete : function() {
 					// Handle the complete event
-					$("#loadIcon").toggle();
+					$("#loadIcon").fadeToggle();
 				}
+			});
+		}
+		
+		function updateData(idUpdate, quantityUpdate){
+			var putData = {};
+			putData.quantity = quantityUpdate;
+			$.ajax({
+				dataType:'json',
+				contentType:'application/json',
+				type:'PUT',
+				 url:'<%=request.getContextPath()%>/rest/tasks/' + idUpdate,
+				 data:JSON.stringify(putData),
+				 statusCode:{
+					 200:function(data){
+						 loadData();
+					 }
+				 },
+				 beforeSend : function() {
+						//alert("before");
+						$("#loadIcon").toggle();
+					},
+					complete : function() {
+						// Handle the complete event
+						$("#loadIcon").fadeToggle();
+					}
 			});
 		}
 	});
@@ -155,8 +185,6 @@
 </head>
 <body>
 	<div class="container">
-		<div class="droppable row">droppable</div>
-
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Einkausliste</h1>
@@ -187,21 +215,6 @@
 			<div class="col-md-3">
 				<span id="errmsg"></span>
 			</div>
-			<div class="col-md-2">
-				<p class="lead">Neue Anzahl:</p>
-			</div>
-			<div class="col-md-2">
-				<div id="draggable">
-					<div class="col-md-3">
-						<span id="draggIcon"
-							class="right lead glyphicon glyphicon-hand-up" aria-hidden="true"></span>
-					</div>
-					<div class="col-md-9">
-						<input id="numberForInput" name="quantity" type="text"
-							class="number form-control" placeholder="Anzahl">
-					</div>
-				</div>
-			</div>
 		</div>
 		<p />
 		<p />
@@ -220,7 +233,6 @@
 				</table>
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>
