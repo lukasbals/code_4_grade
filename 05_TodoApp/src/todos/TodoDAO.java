@@ -87,7 +87,7 @@ public class TodoDAO {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			this.c = DriverManager
-					.getConnection("jdbc:mysql://172.16.19.136/TodoApp?user=studentapp&password=lukibals");
+					.getConnection("jdbc:mysql://172.16.19.138/TodoApp?user=studentapp&password=lukibals");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
