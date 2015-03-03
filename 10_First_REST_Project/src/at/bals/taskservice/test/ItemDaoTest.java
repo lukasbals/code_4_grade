@@ -13,6 +13,7 @@ import at.bals.taskservice.vo.Item;
 
 public class ItemDaoTest {
 
+	//Test für das holen der Daten
 	@Test
 	public void testGetData() {
 		try {
@@ -28,11 +29,12 @@ public class ItemDaoTest {
 		}
 	}
 
+	//Test für das hinzufügen eines Items
 	@Test
 	public void testInsertData() {
 		try {
 			ItemDao dao = new ItemDao();
-			Item t = new Item(0, "hans", 3);
+			Item t = new Item(2, "Ketchup", 3);
 			dao.insertData(t);
 
 			Assert.assertTrue(true);
@@ -43,6 +45,7 @@ public class ItemDaoTest {
 
 	}
 
+	//Test für das löschen eines Items
 	@Test
 	public void testDeleteData() {
 		try {
@@ -57,6 +60,7 @@ public class ItemDaoTest {
 		}
 	}
 
+	//Test zum holen eines einzelnen Items
 	@Test
 	public void testGetItemById() {
 		ItemDao dao = new ItemDao();
@@ -73,6 +77,7 @@ public class ItemDaoTest {
 		}
 	}
 
+	//Test zum updaten von Daten
 	@Test
 	public void testUpdateData() {
 		try {

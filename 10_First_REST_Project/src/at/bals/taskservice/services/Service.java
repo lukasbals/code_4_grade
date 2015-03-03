@@ -20,9 +20,10 @@ import at.bals.taskservice.vo.Item;
 
 @Path("tasks/")
 public class Service {
-	// private Connection connection;
+	//Arraylist erstellen
 	private List<Item> itemList = new ArrayList<Item>();
 
+	//GET
 	@GET
 	@Path("")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
@@ -38,6 +39,7 @@ public class Service {
 		return itemList;
 	}
 
+	//POST
 	@POST
 	@Path("")
 	// @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -52,6 +54,7 @@ public class Service {
 		}
 	}
 
+	//DELETE
 	@DELETE
 	@Path("{id}/")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -65,6 +68,7 @@ public class Service {
 		}
 	}
 
+	//PUT
 	@PUT
 	@Path("{id}/")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })

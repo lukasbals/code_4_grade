@@ -12,7 +12,7 @@
 <style>
 #loadIcon {
 	display: none;
-	margin-left:30px;
+	margin-left: 30px;
 }
 
 #errmsg {
@@ -32,22 +32,25 @@
 
 <script>
 	$(function() {
+		//Daten laden
 		loadData();
 		
+		//Einkauf löschen / erledigt
 		$("tbody").on("click",".done",function(){
 			var id = $(this).attr("data-id");
-			doneTask(id);
+			doneItem(id);
 		});
 		
+		//Die Anzahl einer Items aktualisieren
 		$("tbody").on("click", ".update", function(){
 			var quantityUpdate = $( this ).parent().siblings(".updateNum").val();
 			var idUpdate = $(this).attr("data-idNum");
 			//alert("id: " + idUpdate);
 			//alert("eingegebener Wert:" + value);
-			updateData(idUpdate, quantityUpdate);
-			
+			updateData(idUpdate, quantityUpdate);	
 		});
 		
+		//Ein neues Item hinzufügen
 		$("#insert").click(function(){
 			var name = $("#name").val();
 			var quantity = $("#quantity").val();
@@ -61,27 +64,26 @@
 			$(".number").css("background","white").show();
 		});
 		
-			  $(".number").keypress(function (e) {
-			    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-			        $("#errmsg").html("Bitte nur Nummern eintippen").show().fadeOut(4000);
-			               return false;
-			    }else{
-			    	$(".number").css("background","lightgreen").show();
-		               return true;
-			    }
-			});
-		
-		var numberForInput = $("#numberForInput").val();
-		
-		$("#draggable").draggable();
-		
-		$(".droppable").droppable({
-			hoverClass: "hover",
-			drop : function(e, ui){
-				alert("in");
+		$(".number").keypress(function (e) {
+			if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+				$("#errmsg").html("Bitte nur Nummern eintippen").show().fadeOut(4000);
+				return false;
+			}else{
+				$(".number").css("background","lightgreen").show();
+				return true;
 			}
 		});
+				
+// 		$("#draggable").draggable();
 		
+// 		$(".droppable").droppable({
+// 			hoverClass: "hover",
+// 			drop : function(e, ui){
+// 				alert("in");
+// 			}
+// 		});
+		
+		//Funktion zum Daten laden
 		function loadData() {
 			$.ajax({
 				headers : {
@@ -112,7 +114,8 @@
 					});
 		}
 		
-		function doneTask(id){
+		//Funktion zum Item löschen
+		function doneItem(id){
 			$.ajax({
 		        headers: {
 		          Accept: 'application/json'
@@ -128,6 +131,7 @@
 			});
 		}
 		
+		//Funktion fürs einfügen der Daten
 		function insertData(quantity, name){
 			var postData = {};
 			postData.quantity = quantity;
@@ -155,6 +159,7 @@
 			});
 		}
 		
+		//Funktion zum aktualisieren der Anzahl
 		function updateData(idUpdate, quantityUpdate){
 			var putData = {};
 			putData.quantity = quantityUpdate;

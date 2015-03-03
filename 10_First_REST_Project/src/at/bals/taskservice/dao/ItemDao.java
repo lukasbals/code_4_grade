@@ -46,7 +46,7 @@ public class ItemDao {
 	}
 
 	/**
-	 * Returns all Tasks from the Database
+	 * Returns all only one Task from the database
 	 * 
 	 * @return
 	 * @throws SQLException

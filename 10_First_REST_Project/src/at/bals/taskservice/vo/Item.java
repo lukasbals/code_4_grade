@@ -2,6 +2,7 @@ package at.bals.taskservice.vo;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+//Die Vorlage einer Item für die Arraylist
 @XmlRootElement
 public class Item {
 	private int id;
