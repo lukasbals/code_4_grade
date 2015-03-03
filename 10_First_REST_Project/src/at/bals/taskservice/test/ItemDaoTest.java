@@ -82,7 +82,7 @@ public class ItemDaoTest {
 	public void testUpdateData() {
 		try {
 			ItemDao dao = new ItemDao();
-			Item i = dao.getItemForId(18);
+			Item i = dao.getItemForId(70);
 			int qu = i.getQuantity();
 			qu = qu + 1;
 			i.setQuantity(qu);
