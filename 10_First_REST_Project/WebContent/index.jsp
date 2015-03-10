@@ -44,10 +44,14 @@
 		//Die Anzahl einer Items aktualisieren
 		$("tbody").on("click", ".update", function(){
 			var quantityUpdate = $( this ).parent().siblings(".updateNum").val();
-			var idUpdate = $(this).attr("data-idNum");
-			//alert("id: " + idUpdate);
-			//alert("eingegebener Wert:" + value);
-			updateData(idUpdate, quantityUpdate);	
+			if (quantityUpdate == 0){
+				alert("Bitte etwas eingeben");
+			}else{
+				var idUpdate = $(this).attr("data-idNum");
+				//alert("id: " + idUpdate);
+				//alert("eingegebener Wert:" + value);
+				updateData(idUpdate, quantityUpdate);	
+			}
 		});
 		
 		//Ein neues Item hinzufügen
@@ -64,25 +68,6 @@
 			$(".number").css("background","white").show();
 		});
 		
-		$(".number").keypress(function (e) {
-			if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-				$("#errmsg").html("Bitte nur Nummern eintippen").show().fadeOut(4000);
-				return false;
-			}else{
-				$(".number").css("background","lightgreen").show();
-				return true;
-			}
-		});
-				
-// 		$("#draggable").draggable();
-		
-// 		$(".droppable").droppable({
-// 			hoverClass: "hover",
-// 			drop : function(e, ui){
-// 				alert("in");
-// 			}
-// 		});
-		
 		//Funktion zum Daten laden
 		function loadData() {
 			$.ajax({
@@ -91,27 +76,27 @@
 				},
 				type : 'GET',
 				url : '<%=request.getContextPath()%>/rest/items',
-						statusCode : {
-							200 : function(data) {
-								var myHTML = '';
-								data.item.forEach(function(i) {
-											myHTML = myHTML
-													+ "<tr><td>"
-													+ i.name
-													+ "</td><td class='droppable' data-idNumber='"
-													+i.id
-													+ "'>"
-													+ i.quantity
-													+ "</td><td><button data-id='"
-												+ i.id
-												+ "' class='done btn btn-md btn-success'>Erledigt</button><div class='input-group'><input type='text' class='updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
-												+i.id
-												+"' type='button'>Neu</button></span> </div></td</tr>";
-										});
-								$("#data").html(myHTML);
-							}
-						}
-					});
+				statusCode : {
+					200 : function(data) {
+						var myHTML = '';
+						data.item.forEach(function(i) {
+							myHTML = myHTML
+								+ "<tr><td>"
+								+ i.name
+								+ "</td><td class='droppable' data-idNumber='"
+								+i.id
+								+ "'>"
+								+ i.quantity
+								+ "</td><td><button data-id='"
+								+ i.id
+								+ "' class='done btn btn-md btn-success'>Erledigt</button><div class='input-group'><input type='text' class='number updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
+								+ i.id
+								+ "' type='button'>Neu</button></span> </div></td</tr>";
+							});
+						$("#data").html(myHTML);
+					}
+				}
+			});
 		}
 		
 		//Funktion zum Item löschen
@@ -184,6 +169,17 @@
 					}
 			});
 		}
+		
+		//Unterscheidet ob Zahl oder Nummer
+		$(".number").keypress(function (e) {
+			if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+				$("#errmsg").html("Bitte nur Nummern eintippen").show().fadeOut(4000);
+				return false;
+			}else{
+				$(".number").css("background","lightgreen").show();
+				return true;
+			}
+		});
 	});
 </script>
 
