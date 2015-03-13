@@ -79,24 +79,36 @@
 				statusCode : {
 					200 : function(data) {
 						var myHTML = '';
-						data.item.forEach(function(i) {
-							myHTML = myHTML
-								+ "<tr><td>"
-								+ i.name
-								+ "</td><td class='droppable' data-idNumber='"
-								+i.id
-								+ "'>"
-								+ i.quantity
-								+ "</td><td><button data-id='"
-								+ i.id
-								+ "' class='done btn btn-md btn-success'>Erledigt</button><div class='input-group'><input type='text' class='number updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
-								+ i.id
-								+ "' type='button'>Neu</button></span> </div></td</tr>";
-							});
+						if (data==null){
+							myHTML="";
+						} else if ($.isArray(data.item)){
+							data.item.forEach(function(i) {
+								myHTML = myHTML + makeMyHTML(i);
+								});
+						} else {
+							var i = data.item;
+							myHTML = makeMyHTML(i);
+						}
 						$("#data").html(myHTML);
 					}
 				}
 			});
+		}
+		
+		function makeMyHTML(i){
+			var myHTML = myHTML
+			+ "<tr><td>"
+			+ i.name
+			+ "</td><td class='droppable' data-idNumber='"
+			+i.id
+			+ "'>"
+			+ i.quantity
+			+ "</td><td><button data-id='"
+			+ i.id
+			+ "' class='done btn btn-md btn-success'>Erledigt</button><div class='input-group'><input type='text' class='number updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
+			+ i.id
+			+ "' type='button'>Neu</button></span></div></td></tr>";
+			return myHTML;
 		}
 		
 		//Funktion zum Item löschen
