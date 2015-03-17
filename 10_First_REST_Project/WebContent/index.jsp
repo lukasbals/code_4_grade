@@ -34,7 +34,7 @@
 	$(function() {
 		setInterval(function(){
 			loadData(); 
-		}, 2000);
+		}, 5000);
 		
 		//Funktion zum Daten laden
 		function loadData() {
