@@ -105,7 +105,7 @@
 			+ i.quantity
 			+ "</td><td><button data-id='"
 			+ i.id
-			+ "' class='done btn btn-md btn-success'>Erledigt</button><div class='input-group'><input type='text' class='number updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
+			+ "' class='done btn btn-md btn-success'>Erledigt</button><div class='input-group'><input type='text' class='updateNum form-control' placeholder='Anzahl''><span class='input-group-btn'><button class='update btn btn-default' data-idNum='"
 			+ i.id
 			+ "' type='button'>Neu</button></span></div></td></tr>";
 			return myHTML;
