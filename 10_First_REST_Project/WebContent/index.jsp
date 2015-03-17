@@ -36,39 +36,6 @@
 			loadData(); 
 		}, 2000);
 		
-		//Einkauf löschen / erledigt
-		$("tbody").on("click",".done",function(){
-			var id = $(this).attr("data-id");
-			doneItem(id);
-		});
-		
-		//Die Anzahl einer Items aktualisieren
-		$("tbody").on("click", ".update", function(){
-			var quantityUpdate = $( this ).parent().siblings(".updateNum").val();
-			if (quantityUpdate == 0){
-				alert("Bitte etwas eingeben");
-			}else{
-				var idUpdate = $(this).attr("data-idNum");
-				//alert("id: " + idUpdate);
-				//alert("eingegebener Wert:" + value);
-				updateData(idUpdate, quantityUpdate);	
-			}
-		});
-		
-		//Ein neues Item hinzufügen
-		$("#insert").click(function(){
-			var name = $("#name").val();
-			var quantity = $("#quantity").val();
-			if ((!name) || (quantity == 0)){
-				alert("Beschreibung oder Anzahl fehlt!");
-				return;
-			}
-			insertData(quantity, name);
-			$("#name").val('');
-			$("#quantity").val('');
-			$(".number").css("background","white").show();
-		});
-		
 		//Funktion zum Daten laden
 		function loadData() {
 			$.ajax({
@@ -96,6 +63,7 @@
 			});
 		}
 		
+		//generiert das HTML
 		function makeMyHTML(i){
 			var myHTML = myHTML
 			+ "<tr><td>"
@@ -111,6 +79,12 @@
 			+ "' type='button'>Neu</button></span></div></td></tr>";
 			return myHTML;
 		}
+		
+		//Einkauf löschen / erledigt
+		$("tbody").on("click",".done",function(){
+			var id = $(this).attr("data-id");
+			doneItem(id);
+		});
 		
 		//Funktion zum Item löschen
 		function doneItem(id){
@@ -128,6 +102,59 @@
 				}
 			});
 		}
+		
+		//Die Anzahl einer Items aktualisieren
+		$("tbody").on("click", ".update", function(){
+			var quantityUpdate = $( this ).parent().siblings(".updateNum").val();
+			if (quantityUpdate == 0){
+				alert("Bitte etwas eingeben");
+			}else{
+				var idUpdate = $(this).attr("data-idNum");
+				//alert("id: " + idUpdate);
+				//alert("eingegebener Wert:" + value);
+				updateData(idUpdate, quantityUpdate);	
+			}
+		});
+		
+		//Funktion zum aktualisieren der Anzahl
+		function updateData(idUpdate, quantityUpdate){
+			var putData = {};
+			putData.quantity = quantityUpdate;
+			$.ajax({
+				dataType:'json',
+				contentType:'application/json',
+				type:'PUT',
+				 url:'<%=request.getContextPath()%>/rest/items/' + idUpdate,
+				 data:JSON.stringify(putData),
+				 statusCode:{
+					 200:function(data){
+						 loadData();
+					 }
+				 },
+				 beforeSend : function() {
+						//alert("before");
+						$("#loadIcon").toggle();
+					},
+					complete : function() {
+						// Handle the complete event
+						$("#loadIcon").fadeToggle();
+					}
+			});
+		}
+		
+		//Ein neues Item hinzufügen
+		$("#insert").click(function(){
+			var name = $("#name").val();
+			var quantity = $("#quantity").val();
+			if ((!name) || (quantity == 0)){
+				alert("Beschreibung oder Anzahl fehlt!");
+				return;
+			}
+			insertData(quantity, name);
+			$("#name").val('');
+			$("#quantity").val('');
+			$(".number").css("background","white").show();
+		});
 		
 		//Funktion fürs einfügen der Daten
 		function insertData(quantity, name){
@@ -154,32 +181,6 @@
 					// Handle the complete event
 					$("#loadIcon").fadeToggle();
 				}
-			});
-		}
-		
-		//Funktion zum aktualisieren der Anzahl
-		function updateData(idUpdate, quantityUpdate){
-			var putData = {};
-			putData.quantity = quantityUpdate;
-			$.ajax({
-				dataType:'json',
-				contentType:'application/json',
-				type:'PUT',
-				 url:'<%=request.getContextPath()%>/rest/items/' + idUpdate,
-				 data:JSON.stringify(putData),
-				 statusCode:{
-					 200:function(data){
-						 loadData();
-					 }
-				 },
-				 beforeSend : function() {
-						//alert("before");
-						$("#loadIcon").toggle();
-					},
-					complete : function() {
-						// Handle the complete event
-						$("#loadIcon").fadeToggle();
-					}
 			});
 		}
 		
