@@ -32,8 +32,9 @@
 
 <script>
 	$(function() {
-		//Daten laden
-		loadData();
+		setInterval(function(){
+			loadData(); 
+		}, 2000);
 		
 		//Einkauf löschen / erledigt
 		$("tbody").on("click",".done",function(){
@@ -200,7 +201,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Einkausliste</h1>
+				<h1>Einkaufsliste</h1>
 			</div>
 		</div>
 		<div class="row">

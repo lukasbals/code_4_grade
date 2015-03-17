@@ -14,10 +14,10 @@ import javax.ws.rs.PathParam;
 import at.bals.taskservice.vo.Item;
 
 public class ItemDao {
-	private static final String ipAddress = "172.16.19.139";
+	private static final String ipAddress = "localhost";
 	private static final String databaseName = "firstRest";
-	private static final String userName = "firstRest";
-	private static final String password = "lukibals";
+	private static final String userName = "lukas";
+	private static final String password = "lukas";
 	private Connection connection;
 
 	/**
