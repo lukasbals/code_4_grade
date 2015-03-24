@@ -32,6 +32,7 @@
 
 <script>
 	$(function() {
+		//setzt ein intervall, in diesem Fall alle 5 Sekunden
 		setInterval(function(){
 			loadData(); 
 		}, 5000);
